@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-label="Album cover placeholder">
+  <rect width="1200" height="1200" fill="#ebe6dc"/>
+  <rect x="40" y="40" width="1120" height="1120" fill="none" stroke="#6b4a2b" stroke-width="1" stroke-opacity="0.3"/>
+  <g font-family="Georgia, serif" text-anchor="middle" fill="#16130e">
+    <text x="600" y="560" font-size="56" font-style="italic">The Album</text>
+    <text x="600" y="640" font-size="56" font-style="italic">Everyone Wants</text>
+    <line x1="520" y1="690" x2="680" y2="690" stroke="#6b4a2b" stroke-width="1"/>
+    <text x="600" y="740" font-size="28" fill="#736a5c" letter-spacing="2">CHRIS PORTKA · 2025</text>
+  </g>
+  <text x="600" y="1140" font-size="18" font-family="sans-serif" text-anchor="middle" fill="#736a5c" letter-spacing="3">PLACEHOLDER — REPLACE WITH ALBUM ART</text>
+</svg>

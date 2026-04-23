@@ -1,0 +1,15 @@
+# Cloudflare Pages / Netlify _redirects file.
+# Syntax: <source> <destination> <status>
+#
+# These rules apply once the deprecated domains are pointed (via DNS) at this
+# site's host. At the registrar level, each old domain should CNAME or ALIAS
+# to the Pages/Netlify deploy; this file then handles path-level redirects.
+
+# Preserve press-link equity from the old trashmusic.xyz URL:
+/trash-music              /releases/trash-music    301
+/trashmusic               /releases/trash-music    301
+
+# Legacy paths from the old cportka.xyz portfolio site — fall through to /.
+# Add more rules here as analytics shows where inbound links land.
+
+# Everything else on the apex just resolves normally.

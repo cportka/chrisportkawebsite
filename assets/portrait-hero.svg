@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Portrait placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2622"/>
+      <stop offset="1" stop-color="#0e0d0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="2000" height="2500" fill="url(#bg)"/>
+  <g fill="#ebe6dc" opacity="0.35" font-family="Georgia, serif" text-anchor="middle">
+    <text x="1000" y="1230" font-size="64" font-style="italic">Portrait</text>
+    <text x="1000" y="1320" font-size="32" letter-spacing="4">REPLACE WITH B&amp;W PHOTO</text>
+  </g>
+  <rect x="40" y="40" width="1920" height="2420" fill="none" stroke="#ebe6dc" stroke-opacity="0.08" stroke-width="2"/>
+</svg>
