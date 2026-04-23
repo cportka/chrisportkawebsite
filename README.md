@@ -9,20 +9,25 @@ long-scroll page, static HTML/CSS, anchored by a moody B&W portrait.
 
 ```
 /
-├── index.html                  primary long-scroll page
+├── index.html                  long-scroll home page
 ├── 404.html
 ├── robots.txt
 ├── sitemap.xml
 ├── _redirects                  Cloudflare Pages / Netlify redirect rules
+├── docs/
+│   └── dns.md                  Namecheap + EasyDNS setup steps
+├── scripts/
+│   └── prepare-images.sh       generate hero JPG/WebP/AVIF + OG image
 ├── releases/
+│   ├── the-album-everyone-wants.html
 │   └── trash-music.html        redirect target for trashmusic.xyz equity
 └── assets/
     ├── style.css               single stylesheet — Fraunces + Inter
     ├── favicon.svg
-    ├── portrait-hero.svg       PLACEHOLDER — replace with real photo
+    ├── portrait-hero.svg       placeholder — real photo goes here
     └── albums/
-        ├── taew-cover.svg      PLACEHOLDER
-        └── trash-music-cover.svg  PLACEHOLDER
+        ├── taew-cover.svg      placeholder
+        └── trash-music-cover.svg  placeholder
 ```
 
 No build step. Open `index.html` locally, or run any static server:
@@ -39,15 +44,27 @@ All real assets belong under `assets/`. Commit them as you go.
 
 ### 1. Hero portrait (the moody B&W photo)
 
-Export three formats from the master file and drop them at:
+Save the original photo anywhere (Downloads, Desktop — doesn't matter),
+then run:
 
-- `assets/portrait-hero.jpg`   (2000px wide, ~80-150KB)
-- `assets/portrait-hero.webp`  (same dimensions)
-- `assets/portrait-hero.avif`  (same dimensions)
+```sh
+./scripts/prepare-images.sh ~/Downloads/chris-portrait.jpg
+```
 
-Then open `index.html` and replace the single `<img>` in the `.portrait`
-figure with the `<picture>` element block (the template is commented
-directly above the `<img>`).
+The script generates all five derived files:
+
+- `assets/portrait-hero.jpg`   (2000px, ~80–150KB — the universal fallback)
+- `assets/portrait-hero.webp`  (same dims — modern browsers prefer this)
+- `assets/portrait-hero.avif`  (same dims — most efficient on new browsers)
+- `assets/og-portrait.jpg`     (1200×1200 — link-preview image)
+
+Requires ImageMagick (`brew install imagemagick`). WebP + AVIF generation
+is optional — the script skips them cleanly if `cwebp`/`avifenc` aren't
+installed, but installing them is recommended for a ~40% smaller hero
+load (`brew install webp libavif`).
+
+`index.html` already references the real JPG/WebP/AVIF paths via a
+`<picture>` element — no HTML edit needed after running the script.
 
 ### 2. Album covers
 
@@ -56,42 +73,42 @@ Drop the real cover art at:
 - `assets/albums/taew-cover.jpg`  (1200×1200)
 - `assets/albums/trash-music-cover.jpg`
 
-Then update the two `<img src="...-cover.svg">` references in `index.html`
-and the one in `releases/trash-music.html` to `.jpg`.
+Then update the `<img src="...-cover.svg">` references (four total —
+two in `index.html`, one in `releases/the-album-everyone-wants.html`,
+one in `releases/trash-music.html`) from `.svg` to `.jpg`.
 
-For each additional release, add a cover at `assets/albums/SLUG-cover.jpg`
-and a `<li class="release-item">` block in the discography list
-(the template is commented inside `<ol class="releases">`).
+For each additional release:
 
-### 3. OpenGraph / Twitter card image
+1. Add the cover at `assets/albums/SLUG-cover.jpg`.
+2. Copy `releases/the-album-everyone-wants.html` to
+   `releases/SLUG.html` and swap the title, Bandcamp album ID, copy,
+   and JSON-LD.
+3. Add a `<li class="release-item">` block to the discography list in
+   `index.html` (template is commented inside `<ol class="releases">`).
+4. Add a `<url>` entry to `sitemap.xml`.
 
-Export a 1200×630 version of the portrait (crop to include head + shoulders
-with some air at top) and save at `assets/og-portrait.jpg`. This is what
-shows up when the site gets shared on Twitter/X, Slack, iMessage, etc.
-
-### 4. Apple touch icon
+### 3. Apple touch icon
 
 A 180×180 PNG derived from the portrait or the monogram at
 `assets/apple-touch-icon.png`.
 
-### 5. Bandcamp embed
+### 4. Bandcamp embed
 
-On Bandcamp, go to *The Album Everyone Wants* → Tools → Embed this album.
-Pick the "big" format. Set the colors to match:
+The embed for *The Album Everyone Wants* is already wired
+(`album=3141064362`, bgcol=`f5f2ec`, linkcol=`6b4a2b`).
 
-- Background: `f5f2ec`
-- Link color: `6b4a2b`
+For additional releases, go to the Bandcamp admin for each album →
+**Tools → Embed this album**, and copy the embed code. Use the site
+colors: `bgcol=f5f2ec&linkcol=6b4a2b`. Paste into the appropriate
+release page.
 
-Copy the generated `<iframe src="...">` URL and replace
-`src="about:blank"` on the `.bandcamp-embed` iframe in `index.html`.
-
-### 6. Mailing list
+### 5. Mailing list
 
 Sign up at https://buttondown.email (free up to 100 subscribers).
 Settings → Embeds → Form. The endpoint will be
 `https://buttondown.email/api/emails/embed-subscribe/YOURUSERNAME`.
-Replace `chrisportka` in the subscribe form's `action` attribute if your
-Buttondown username differs.
+Replace `chrisportka` in the subscribe form's `action` attribute in
+`index.html` if your Buttondown username differs.
 
 ---
 
@@ -122,23 +139,17 @@ each release in reverse chronological order.
 Both work identically for this kind of site. Netlify reads `_redirects`
 as-is. Vercel needs a `vercel.json` — ask and I'll add one.
 
-### Email forwarding (`hello@chrisportka.com`)
+### DNS, email forwarding, and 301 redirects
 
-Do this at the domain registrar — not in this repo. Most registrars offer
-free email forwarding. Point `hello@chrisportka.com` at your Gmail.
+See **[docs/dns.md](docs/dns.md)** — it has concrete Namecheap and EasyDNS
+steps for:
 
-### 301s from deprecated domains
-
-This is DNS + host config at the deprecated domain's registrar, not code
-in this repo. For each deprecated domain (`cportka.com`, `cportka.io`,
-`cportka.xyz`, `trashmusic.xyz`, `djpants.xyz`, `portka.io`):
-
-1. At the registrar, set the domain to redirect (301) to the appropriate
-   URL on `chrisportka.com` — most registrars have a "forwarding" feature.
-2. For `trashmusic.xyz` specifically, redirect to
-   `https://chrisportka.com/releases/trash-music` to preserve press-link
-   equity from old reviews.
-3. All others redirect to `https://chrisportka.com/`.
+- Pointing `chrisportka.com` + `www` at your host
+- Setting up `hello@chrisportka.com` → Gmail forwarding
+- 301 redirects from each deprecated domain (`cportka.com`,
+  `cportka.io`, `cportka.xyz`, `trashmusic.xyz`, `djpants.xyz`,
+  `portka.io`, `lofibluesky.io`)
+- A curl snippet to verify every redirect resolves correctly
 
 ---
 

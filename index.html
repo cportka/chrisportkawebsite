@@ -56,20 +56,14 @@
   <!-- ================= HERO ================= -->
   <section class="hero" aria-labelledby="name">
     <figure class="portrait">
-      <!--
-        When the real B&W portrait is ready, swap this <img> for a <picture>:
-
-          <picture>
-            <source srcset="/assets/portrait-hero.avif" type="image/avif">
-            <source srcset="/assets/portrait-hero.webp" type="image/webp">
-            <img src="/assets/portrait-hero.jpg"
-                 alt="Portrait of Chris Portka"
-                 width="2000" height="2500" fetchpriority="high">
-          </picture>
-
-        Target ~80-150KB JPEG (2000px wide), plus matching AVIF + WebP.
-      -->
-      <img src="/assets/portrait-hero.svg" alt="Portrait of Chris Portka (placeholder)" width="2000" height="2500" fetchpriority="high">
+      <picture>
+        <source srcset="/assets/portrait-hero.avif" type="image/avif">
+        <source srcset="/assets/portrait-hero.webp" type="image/webp">
+        <img src="/assets/portrait-hero.jpg"
+             alt="Chris Portka"
+             width="2000" height="2000"
+             fetchpriority="high">
+      </picture>
     </figure>
     <header class="hero-text">
       <h1 id="name">Chris Portka</h1>
@@ -106,19 +100,15 @@
       </div>
     </div>
 
-    <!--
-      Bandcamp embed — replace the iframe src with the real embed code from
-      Bandcamp → Tools → Embed this album. Pick the "big" format and match
-      colors to the site palette (bgcol=f5f2ec, linkcol=6b4a2b).
-    -->
     <div class="bandcamp-embed">
       <iframe
         title="The Album Everyone Wants on Bandcamp"
-        style="border:0;width:100%;height:470px;"
-        src="about:blank"
-        data-bandcamp-placeholder="true"
-        loading="lazy"></iframe>
-      <noscript><a href="https://cportka.bandcamp.com/album/the-album-everyone-wants">Listen on Bandcamp</a></noscript>
+        src="https://bandcamp.com/EmbeddedPlayer/album=3141064362/size=large/bgcol=f5f2ec/linkcol=6b4a2b/tracklist=false/transparent=true/"
+        seamless
+        loading="lazy"
+        style="border:0;width:350px;height:470px;max-width:100%;">
+        <a href="https://cportka.bandcamp.com/album/the-album-everyone-wants">The Album Everyone Wants by chris portka</a>
+      </iframe>
     </div>
   </section>
 
@@ -142,7 +132,7 @@
 
     <ol class="releases">
       <li class="release-item release-item--featured">
-        <a href="https://cportka.bandcamp.com/album/the-album-everyone-wants">
+        <a href="/releases/the-album-everyone-wants">
           <img src="/assets/albums/taew-cover.svg" alt="" width="400" height="400" loading="lazy">
           <div class="release-meta">
             <h3>The Album Everyone Wants</h3>
@@ -153,7 +143,7 @@
       </li>
 
       <li class="release-item">
-        <a href="https://cportka.bandcamp.com/album/trash-music">
+        <a href="/releases/trash-music">
           <img src="/assets/albums/trash-music-cover.svg" alt="" width="400" height="400" loading="lazy">
           <div class="release-meta">
             <h3>Trash Music</h3>
@@ -165,11 +155,13 @@
 
       <!--
         Add the remaining seven releases here in reverse chronological order.
-        Copy the template below for each. Drop album covers in
-        /assets/albums/ and link to the Bandcamp page.
+        For each: drop the cover in /assets/albums/SLUG-cover.jpg, add a
+        release page at /releases/SLUG.html (copy the-album-everyone-wants.html
+        as a template and swap in the Bandcamp embed + copy), and add a
+        list item here.
 
         <li class="release-item">
-          <a href="https://cportka.bandcamp.com/album/SLUG">
+          <a href="/releases/SLUG">
             <img src="/assets/albums/SLUG-cover.jpg" alt="" width="400" height="400" loading="lazy">
             <div class="release-meta">
               <h3>Album Title</h3>
