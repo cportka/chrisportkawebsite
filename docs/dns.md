@@ -93,18 +93,80 @@ free on every plan and doesn't need a separate mailbox — messages to
    address. It should land in your Gmail inbox, with the sender preserved
    (so you can see who really wrote).
 
-### Why this matters for the subscribe form
+### MX records — what they are, why EasyDNS is asking
 
-The mailing-list form on the site posts to Formsubmit, which emails
-`hello@chrisportka.com`. Without the EasyDNS forward in place, those
-submissions bounce. With it, you see new subscribers land in Gmail like
-any other email — no extra tool to check.
+Your domain's A records tell the internet "web traffic for
+`chrisportka.com` goes to GitHub Pages". They don't say anything about
+email. If someone emails `hello@chrisportka.com` with only A records set,
+their mail server can't find a mail host and the message bounces.
 
-**First subscription = activation.** Formsubmit sends a one-time
-confirmation link the first time any email is posted to your endpoint,
-so the very first "New chrisportka.com subscriber" message in your
-inbox will actually be the activation email. Click the link inside it
-once. After that, real subscriber notifications flow normally.
+**MX (Mail eXchange) records** fix that. They're a separate DNS record
+type, one per mail server, and they tell senders: "to deliver email for
+this domain, contact *this host*." Each record has a priority — lower
+numbers are tried first.
+
+For EasyMail Forwarding, EasyDNS needs two MX records pointing at their
+inbound mail servers. Web and mail routing live side by side on the
+same domain — the A records (web) and MX records (mail) don't conflict.
+
+### Exactly what to add at EasyDNS
+
+DNS tab for `chrisportka.com` →
+
+| Host | Type | Priority | Target             |
+|------|------|----------|--------------------|
+| `@`  | MX   | 10       | `mx1.easydns.com.` |
+| `@`  | MX   | 20       | `mx2.easydns.com.` |
+
+The trailing dot on the target is important on some registrar UIs
+(tells DNS the value is a fully-qualified name, not a subdomain of
+your own). On EasyDNS specifically, with or without the dot usually
+works, but add it to be safe.
+
+**Recommended (optional) SPF record.** Prevents spammers from spoofing
+your domain. Add as a TXT record:
+
+| Host | Type | Value                              |
+|------|------|------------------------------------|
+| `@`  | TXT  | `v=spf1 include:easydns.com ~all`  |
+
+### Before you save — delete any old MX records first
+
+If the domain was ever set up with another mail provider (Google
+Workspace, Zoho, etc.), there will be leftover MX records pointing
+somewhere else. Mail routing gets confused if multiple MX sets exist,
+so remove those first.
+
+### Verifying after save
+
+Propagation is usually 5-15 min at EasyDNS. From your terminal:
+
+```sh
+dig +short MX chrisportka.com
+# expect:
+#   10 mx1.easydns.com.
+#   20 mx2.easydns.com.
+
+dig +short TXT chrisportka.com
+# expect one line containing v=spf1 include:easydns.com ~all
+```
+
+Once those resolve, finish the forwarding config:
+- Mail tab → **Add forward**
+- Source: `hello` (EasyDNS appends the domain)
+- Destination: your Gmail
+- Save
+
+Send a test email to `hello@chrisportka.com` from a different address
+and it should land in your Gmail within a minute or two.
+
+### Why this matters for the contact link
+
+The contact section's `mailto:hello@chrisportka.com` link silently
+fails until MX + forward are in place. The Google Form subscribe flow
+doesn't depend on this — subscriptions go directly to the linked
+Google Sheet — but anyone using the direct email link gets a bounce
+until you finish this step.
 
 ### Replying from hello@chrisportka.com in Gmail
 
