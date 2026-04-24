@@ -67,12 +67,65 @@ Both registrars offer free forwarding.
 > "Send mail as" → Add. Namecheap doesn't provide SMTP — use Gmail's
 > (smtp.gmail.com, port 587, your Gmail password or an App Password).
 
-### EasyDNS
+### EasyDNS — detailed walkthrough
 
-1. Domain dashboard → **Mail** tab
-2. Enable **EasyMail** forwarding (included free on most plans)
-3. Alias: `hello` → your Gmail
-4. Save.
+EasyDNS calls their forwarding feature **EasyMail Forwarding**. It's
+free on every plan and doesn't need a separate mailbox — messages to
+`hello@chrisportka.com` are rewritten and relayed to your personal Gmail.
+
+1. **Control panel** → <https://cp.easydns.com/> → sign in
+2. **Domains** → click `chrisportka.com`
+3. Look for **Mail** in the left navigation (sometimes under *Services*
+   or *Manage* depending on UI vintage). If **Mail** is missing, check
+   **Services → Enable EasyMail** first.
+4. Inside the Mail tab:
+   - Confirm **MX records** are set to EasyDNS mail hosts. EasyMail
+     usually adds these automatically when you enable it; if not,
+     click the *"Add EasyMail MX records"* button (or manually add
+     `MX 10 mx1.easydns.com` and `MX 20 mx2.easydns.com` on the DNS tab).
+   - Under **Forwarders** / **Aliases**, click **Add forward**.
+   - Source: `hello` (just the local part — EasyDNS appends the domain)
+   - Destination: `your.real@gmail.com`
+   - Save.
+5. Allow **5–30 min** for the MX to propagate and the alias to become
+   active.
+6. Test: send a message to `hello@chrisportka.com` from a different
+   address. It should land in your Gmail inbox, with the sender preserved
+   (so you can see who really wrote).
+
+### Why this matters for the subscribe form
+
+The mailing-list form on the site posts to Formsubmit, which emails
+`hello@chrisportka.com`. Without the EasyDNS forward in place, those
+submissions bounce. With it, you see new subscribers land in Gmail like
+any other email — no extra tool to check.
+
+**First subscription = activation.** Formsubmit sends a one-time
+confirmation link the first time any email is posted to your endpoint,
+so the very first "New chrisportka.com subscriber" message in your
+inbox will actually be the activation email. Click the link inside it
+once. After that, real subscriber notifications flow normally.
+
+### Replying from hello@chrisportka.com in Gmail
+
+This is optional — if you only need inbound, skip it. For reply-as:
+
+1. Gmail → Settings (gear icon) → **See all settings**
+2. **Accounts and Import** → **Send mail as** → **Add another email address**
+3. Name: `Chris Portka`, Address: `hello@chrisportka.com`, uncheck *Treat
+   as an alias*
+4. Next screen:
+   - SMTP server: `smtp.gmail.com`
+   - Port: `587`
+   - Username: your Gmail address
+   - Password: a Gmail *App Password* (not your login password — create
+     at <https://myaccount.google.com/apppasswords>; requires 2FA on
+     the Google account)
+   - TLS: yes
+5. Gmail sends a confirmation code to `hello@chrisportka.com`. Because
+   the forward is in place, the code arrives in Gmail. Enter it.
+6. You can now pick `hello@chrisportka.com` from the "From" dropdown
+   when composing.
 
 ---
 

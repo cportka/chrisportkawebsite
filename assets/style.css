@@ -234,13 +234,30 @@ h1#name {
 @media (min-width: 760px) {
   .release-grid { grid-template-columns: 1fr 1.2fr; gap: 3.5rem; align-items: start; }
 }
-.album-cover { margin: 0; }
-.album-cover img {
-  width: 100%;
+.album-cover {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.album-cover > * {
   background: var(--bg-raised);
   box-shadow:
     0 0 0 1px var(--rule),
     0 30px 60px -30px rgba(0, 0, 0, 0.7);
+}
+.album-cover img {
+  width: 100%;
+}
+.album-cover iframe {
+  display: block;
+  border: 0;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 350 / 470;
+  height: auto;
+}
+.album-cover--tracklist iframe {
+  aspect-ratio: 350 / 670;
 }
 .lede {
   font-family: var(--serif);

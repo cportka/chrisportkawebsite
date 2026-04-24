@@ -76,7 +76,13 @@
 
     <div class="release-grid">
       <figure class="album-cover">
-        <img src="/assets/albums/taew-cover.svg" alt="Album cover for The Album Everyone Wants (placeholder)" width="1200" height="1200">
+        <iframe
+          title="The Album Everyone Wants on Bandcamp"
+          src="https://bandcamp.com/EmbeddedPlayer/album=3141064362/size=large/bgcol=100c17/linkcol=b59dd1/tracklist=false/transparent=true/"
+          seamless
+          loading="lazy">
+          <a href="https://cportka.bandcamp.com/album/the-album-everyone-wants">The Album Everyone Wants by chris portka</a>
+        </iframe>
       </figure>
 
       <div class="release-text">
@@ -97,24 +103,13 @@
         <p class="vinyl-link"><a href="https://www.seekcollective.com/products/vinyl-the-album-everyone-wants" class="arrow-link">Buy the vinyl &rarr;</a></p>
       </div>
     </div>
-
-    <div class="bandcamp-embed">
-      <iframe
-        title="The Album Everyone Wants on Bandcamp"
-        src="https://bandcamp.com/EmbeddedPlayer/album=3141064362/size=large/bgcol=100c17/linkcol=b59dd1/tracklist=false/transparent=true/"
-        seamless
-        loading="lazy"
-        style="border:0;width:350px;height:470px;max-width:100%;">
-        <a href="https://cportka.bandcamp.com/album/the-album-everyone-wants">The Album Everyone Wants by chris portka</a>
-      </iframe>
-    </div>
   </section>
 
   <!-- ================= BIO ================= -->
   <section id="bio" class="bio" aria-labelledby="bio-heading">
     <h2 id="bio-heading" class="section-heading">About</h2>
     <p>Chris Portka is a songwriter and multi-instrumentalist based in Berkeley, California. After spending five years in Voice Movement Therapy to overcome a lifelong fear of singing, he began releasing records in 2020 &mdash; nine albums spanning folk, psych, experimental rock, and ambient.</p>
-    <p>His 2025 record <em>The Album Everyone Wants</em>, co-produced with Jasper Leach at New York&rsquo;s Sear Sound and Oakland&rsquo;s Brothers Recording, draws on the American songbook&rsquo;s stranger corners: Syd Barrett, Skip Spence, George Jones, and his own quiet, observational writing.</p>
+    <p>His 2025 record <em>The Album Everyone Wants</em>, co-produced with Jasper Leach at New York&rsquo;s Sear Sound and Oakland&rsquo;s Brothers Recording, draws on the American songbook&rsquo;s stranger corners: Syd Barrett, Skip Spence, George Jones, and his own hey, how&rsquo;s everybody doing tonight?</p>
 
     <div class="press">
       <blockquote>
@@ -182,20 +177,30 @@
 
   <!-- ================= MAILING LIST ================= -->
   <section id="mail" class="mail" aria-labelledby="mail-heading">
-    <div class="mail-frame">
+    <div class="mail-frame" id="mail-frame">
       <h2 id="mail-heading" class="section-heading">Mailing list</h2>
       <p>New music, show announcements. Infrequent.</p>
 
       <!--
-        Replace the form action below with your Buttondown embed URL
-        (Buttondown → Settings → Embeds → Form). The markup is intentionally
-        minimal so the embed matches the site's typography.
+        Submissions are sent via Formsubmit.co to hello@chrisportka.com,
+        which forwards (via EasyDNS) to Chris's Gmail. First-time
+        submission triggers an activation email — click the link inside,
+        then every later submission arrives as a normal email with the
+        subscriber's address. No signup, no JS dependency, no cost.
+
+        Upgrading to a real mailing list tool (Buttondown, MailerLite):
+        swap the `action` URL and `_subject`/`_next`/`_template` hidden
+        fields for whatever the new tool provides. Nothing else changes.
       -->
       <form
-        action="https://buttondown.email/api/emails/embed-subscribe/chrisportka"
-        method="post"
-        target="_blank"
+        action="https://formsubmit.co/hello@chrisportka.com"
+        method="POST"
         class="subscribe">
+        <input type="hidden" name="_subject" value="New chrisportka.com subscriber">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://chrisportka.com/?subscribed=true#mail">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
         <label for="email" class="visually-hidden">Email address</label>
         <input type="email" name="email" id="email" placeholder="you@example.com" required>
         <button type="submit">Subscribe</button>
@@ -207,7 +212,6 @@
   <section id="contact" class="contact" aria-labelledby="contact-heading">
     <h2 id="contact-heading" class="section-heading">Contact</h2>
     <p><a href="mailto:hello@chrisportka.com">hello@chrisportka.com</a></p>
-    <p class="muted">Licensing &amp; sync inquiries: <a href="mailto:hello@chrisportka.com">hello@chrisportka.com</a></p>
   </section>
 
 </main>
@@ -227,6 +231,17 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Swap the subscribe form for a thank-you once Formsubmit redirects back
+  // with ?subscribed=true. No framework, no cookies — just reads the URL.
+  if (new URLSearchParams(location.search).get('subscribed') === 'true') {
+    var frame = document.getElementById('mail-frame');
+    if (frame) {
+      frame.innerHTML =
+        '<h2 class="section-heading">Thank you.</h2>' +
+        '<p>You&rsquo;re on the list. Check your inbox if this was your first time — Formsubmit sends a one-time confirmation.</p>';
+    }
+  }
 </script>
 
 </body>
