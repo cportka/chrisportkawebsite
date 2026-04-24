@@ -169,49 +169,38 @@
     <p class="full-disco"><a href="https://cportka.bandcamp.com" class="arrow-link">Full catalog on Bandcamp &rarr;</a></p>
   </section>
 
-  <!-- ================= SHOWS ================= -->
-  <section id="shows" class="shows" aria-labelledby="shows-heading">
-    <h2 id="shows-heading" class="section-heading">Shows</h2>
-    <p>Occasional Bay Area appearances. Join the mailing list for announcements.</p>
-  </section>
+  <!-- ================= OUTRO (Shows + Mail + Contact, compacted) ================= -->
+  <section id="stay" class="outro" aria-labelledby="stay-heading">
+    <h2 id="stay-heading" class="section-heading">Stay in tune</h2>
 
-  <!-- ================= MAILING LIST ================= -->
-  <section id="mail" class="mail" aria-labelledby="mail-heading">
-    <div class="mail-frame" id="mail-frame">
-      <h2 id="mail-heading" class="section-heading">Mailing list</h2>
-      <p>New music, show announcements. Infrequent.</p>
+    <!--
+      The subscribe form posts to a Google Form, which drops the email
+      into a linked Google Sheet. The __GOOGLE_FORM_ID__ and
+      entry.__EMAIL_FIELD__ tokens are placeholders — fill them in by
+      running:
 
-      <!--
-        Submissions are sent via Formsubmit.co to hello@chrisportka.com,
-        which forwards (via EasyDNS) to Chris's Gmail. First-time
-        submission triggers an activation email — click the link inside,
-        then every later submission arrives as a normal email with the
-        subscriber's address. No signup, no JS dependency, no cost.
+          ./scripts/wire-google-form.sh https://forms.gle/TQm3Y9fkJDHZfVJN8
 
-        Upgrading to a real mailing list tool (Buttondown, MailerLite):
-        swap the `action` URL and `_subject`/`_next`/`_template` hidden
-        fields for whatever the new tool provides. Nothing else changes.
-      -->
-      <form
-        action="https://formsubmit.co/hello@chrisportka.com"
-        method="POST"
-        class="subscribe">
-        <input type="hidden" name="_subject" value="New chrisportka.com subscriber">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://chrisportka.com/?subscribed=true#mail">
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
-        <label for="email" class="visually-hidden">Email address</label>
-        <input type="email" name="email" id="email" placeholder="you@example.com" required>
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
-  </section>
+      That script resolves the short URL, extracts the form ID and
+      the email field's entry ID, and patches this file. Commit after.
+    -->
+    <form
+      id="subscribe-form"
+      action="https://docs.google.com/forms/d/e/__GOOGLE_FORM_ID__/formResponse"
+      method="POST"
+      target="subscribe_sink"
+      class="subscribe">
+      <label for="email" class="visually-hidden">Email address</label>
+      <input type="email" name="entry.__EMAIL_FIELD__" id="email" placeholder="you@example.com" autocomplete="email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <iframe name="subscribe_sink" id="subscribe_sink" title="Submit sink" aria-hidden="true" tabindex="-1"></iframe>
 
-  <!-- ================= CONTACT ================= -->
-  <section id="contact" class="contact" aria-labelledby="contact-heading">
-    <h2 id="contact-heading" class="section-heading">Contact</h2>
-    <p><a href="mailto:hello@chrisportka.com">hello@chrisportka.com</a></p>
+    <p class="outro-note">Infrequent dispatches &mdash; new records and the occasional Bay Area show.</p>
+
+    <p class="outro-direct">
+      Or write directly: <a href="mailto:hello@chrisportka.com">hello@chrisportka.com</a>
+    </p>
   </section>
 
 </main>
@@ -232,16 +221,27 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Swap the subscribe form for a thank-you once Formsubmit redirects back
-  // with ?subscribed=true. No framework, no cookies — just reads the URL.
-  if (new URLSearchParams(location.search).get('subscribed') === 'true') {
-    var frame = document.getElementById('mail-frame');
-    if (frame) {
-      frame.innerHTML =
+  // Google Form submission flow:
+  //   1. user submits → form POSTs to the hidden iframe (no page nav)
+  //   2. iframe loads the Google confirmation page → load event fires
+  //   3. we swap the form for a thank-you card, in place
+  // The first `load` event fires when the iframe is created empty, so
+  // we gate the swap on `submitted` to ignore that initial pass.
+  (function() {
+    var form = document.getElementById('subscribe-form');
+    var sink = document.getElementById('subscribe_sink');
+    var outro = document.getElementById('stay');
+    if (!form || !sink || !outro) return;
+    var submitted = false;
+    form.addEventListener('submit', function() { submitted = true; });
+    sink.addEventListener('load', function() {
+      if (!submitted) return;
+      outro.innerHTML =
         '<h2 class="section-heading">Thank you.</h2>' +
-        '<p>You&rsquo;re on the list. Check your inbox if this was your first time — Formsubmit sends a one-time confirmation.</p>';
-    }
-  }
+        '<p class="outro-note">You&rsquo;re on the list. Next dispatch will be infrequent, as promised.</p>' +
+        '<p class="outro-direct">In the meantime: <a href="mailto:hello@chrisportka.com">hello@chrisportka.com</a></p>';
+    });
+  })();
 </script>
 
 </body>

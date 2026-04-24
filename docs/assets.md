@@ -74,13 +74,25 @@ Optional but nice. A 180×180 PNG derived from the portrait or the
 monogram at `assets/apple-touch-icon.png`. The HTML already links to
 this path.
 
-## Mailing list (Buttondown)
+## Mailing list
 
-Sign up at https://buttondown.email. The free tier handles up to 100
-subscribers — plenty of runway.
+Subscriptions land in a Google Sheet via a Google Form. The form and
+sheet are linked in Google Drive; the site posts directly to the form's
+`formResponse` endpoint using a hidden iframe (so the user stays on
+`chrisportka.com` the whole time and sees an in-place thank-you).
 
-Settings → Embeds → Form. Your endpoint will be
-`https://buttondown.email/api/emails/embed-subscribe/YOURUSERNAME`.
+To (re)wire the subscribe form to a Google Form, run:
 
-If your Buttondown username isn't `chrisportka`, update the
-subscribe form's `action` attribute in `index.html`.
+```sh
+./scripts/wire-google-form.sh https://forms.gle/YOURSHORTCODE
+```
+
+The script resolves the short URL, extracts the form ID and the email
+field's `entry.N` ID, and patches `index.html`. Re-runnable — if the
+form changes, rerun with the new URL.
+
+If you ever want to move off Google Forms (e.g. to Buttondown or a
+real newsletter tool), replace the `<form>` and `<iframe>` block in
+`index.html` with whatever the new tool provides. The `.subscribe`
+class styling works against any `<form><input type="email"><button>`
+structure.

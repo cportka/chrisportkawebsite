@@ -413,37 +413,48 @@ h1#name {
 
 .full-disco { font-size: 0.875rem; letter-spacing: 0.04em; }
 
-/* ---------- Shows ---------- */
-.shows p {
+/* ---------- Outro (Stay in tune — shows + mail + contact in one block) ---------- */
+.outro {
+  max-width: 34rem;
+  text-align: center;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.outro .section-heading { margin-bottom: 1.75rem; }
+.outro .section-heading::after { margin: 1.25rem auto 0; }
+.outro-note {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 300;
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
   color: var(--ink-soft);
-  max-width: var(--measure);
+  margin: 1.25rem 0 0.25rem;
+  line-height: 1.5;
 }
-
-/* ---------- Mailing list ---------- */
-.mail { padding-top: 0; }
-.mail-frame {
-  border: 1px solid var(--rule);
-  background: var(--bg-raised);
-  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
-  max-width: 36rem;
-  margin: 0 auto;
-  text-align: center;
+.outro-direct {
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0.75rem 0 0;
 }
-.mail .section-heading { margin-bottom: 0.75rem; }
-.mail .section-heading::after { margin: 1.25rem auto 0; }
-.mail p {
+.outro-direct a {
   color: var(--ink-soft);
-  margin-bottom: 1.5rem;
+  text-decoration-color: var(--rule);
+  text-transform: none;
+  letter-spacing: 0;
   font-size: 0.9375rem;
 }
+.outro-direct a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+#subscribe_sink {
+  display: none;
+}
+
 .subscribe {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
   max-width: 26rem;
   margin: 0 auto;
 }
@@ -485,10 +496,6 @@ h1#name {
   .subscribe { flex-direction: row; }
   .subscribe input[type="email"] { flex: 1; }
 }
-
-/* ---------- Contact ---------- */
-.contact p { font-size: 1.0625rem; }
-.contact .muted { color: var(--ink-muted); font-size: 0.9375rem; }
 
 /* ---------- Footer ---------- */
 .site-footer {
