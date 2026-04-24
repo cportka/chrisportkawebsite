@@ -111,17 +111,28 @@ same domain — the A records (web) and MX records (mail) don't conflict.
 
 ### Exactly what to add at EasyDNS
 
-DNS tab for `chrisportka.com` →
+DNS tab (or **Mail → Edit MX records**) for `chrisportka.com`:
 
-| Host | Type | Priority | Target             |
-|------|------|----------|--------------------|
-| `@`  | MX   | 10       | `mx1.easydns.com.` |
-| `@`  | MX   | 20       | `mx2.easydns.com.` |
+| Host | Type | Priority | Mail Server |
+|------|------|----------|-------------|
+| `@`  | MX   | 10       | `LOCAL`     |
+| `@`  | MX   | 20       | `LOCAL`     |
 
-The trailing dot on the target is important on some registrar UIs
-(tells DNS the value is a fully-qualified name, not a subdomain of
-your own). On EasyDNS specifically, with or without the dot usually
-works, but add it to be safe.
+**Yes, the literal word `LOCAL`** — uppercase, no quotes, no domain.
+This is an EasyDNS keyword that means "use your own mail infrastructure
+**and apply my mailmaps to it**." If you put `mx1.easydns.com` directly
+in the Mail Server field, DNS routes the mail correctly but EasyDNS's
+forwarding engine doesn't check your mailmaps, so messages bounce.
+Public DNS ends up looking identical either way (both resolve to
+`mx1.easydns.com` / `mx2.easydns.com` when queried externally) — the
+difference is purely internal to EasyDNS's mail-routing logic.
+
+One `LOCAL` entry at pref 10 is sufficient. A second at pref 20 just
+gives redundancy inside EasyDNS's cluster.
+
+**If EasyDNS's UI shows a "Does not appear to be a valid server"
+warning when you type `LOCAL`**, ignore it and confirm anyway — that's
+a false positive from their hostname validator.
 
 **Recommended (optional) SPF record.** Prevents spammers from spoofing
 your domain. Add as a TXT record:
@@ -143,7 +154,7 @@ Propagation is usually 5-15 min at EasyDNS. From your terminal:
 
 ```sh
 dig +short MX chrisportka.com
-# expect:
+# expect (EasyDNS expands LOCAL publicly to their real hosts):
 #   10 mx1.easydns.com.
 #   20 mx2.easydns.com.
 
@@ -151,11 +162,12 @@ dig +short TXT chrisportka.com
 # expect one line containing v=spf1 include:easydns.com ~all
 ```
 
-Once those resolve, finish the forwarding config:
-- Mail tab → **Add forward**
-- Source: `hello` (EasyDNS appends the domain)
-- Destination: your Gmail
-- Save
+Then finish the forwarding config — on EasyDNS this lives under
+**Email → Mail → mailmaps** (not "Add forward"):
+- Mailmap: `hello` (EasyDNS appends the domain automatically)
+- Destination: your Gmail, or a plus-addressed alias like
+  `yourname+hello@gmail.com` so you can filter on it later
+- Click **Next** / Save
 
 Send a test email to `hello@chrisportka.com` from a different address
 and it should land in your Gmail within a minute or two.
