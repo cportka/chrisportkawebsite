@@ -175,14 +175,9 @@
 
     <!--
       Subscriptions post to a Google Form, which drops the email into a
-      linked Google Sheet. The entry.__EMAIL_FIELD__ token is a
-      placeholder — finalize it by running:
+      linked Google Sheet. To re-wire to a different form later, run:
 
-        ./scripts/wire-google-form.sh \
-          https://docs.google.com/forms/d/e/1FAIpQLSekASuiQlaQbViFl5JQ0wZsY4YdR8EMfCF3rnSwQurMrU7T4Q/viewform
-
-      The script pulls the email field's entry.NNNNNN ID from the form's
-      HTML and substitutes it in place. Re-runnable if the form changes.
+        ./scripts/wire-google-form.sh <viewform URL or entry.NNNNN>
     -->
     <form
       id="subscribe-form"
@@ -191,7 +186,7 @@
       target="subscribe_sink"
       class="subscribe">
       <label for="email" class="visually-hidden">Email address</label>
-      <input type="email" name="entry.__EMAIL_FIELD__" id="email" placeholder="you@example.com" autocomplete="email" required>
+      <input type="email" name="entry.2065888469" id="email" placeholder="you@example.com" autocomplete="email" required>
       <button type="submit">Subscribe</button>
     </form>
     <iframe name="subscribe_sink" id="subscribe_sink" title="Submit sink" aria-hidden="true" tabindex="-1"></iframe>
