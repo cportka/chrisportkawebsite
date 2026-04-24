@@ -61,9 +61,12 @@ Bandcamp → *album admin* → **Tools → Embed this album**, then replace
 these two params in the iframe URL:
 
 ```
-bgcol=f5f2ec    (paper)
-linkcol=6b4a2b  (sepia)
+bgcol=100c17    (deep smokey)
+linkcol=b59dd1  (lavender)
 ```
+
+Keep `transparent=true` — it lets the Bandcamp frame sit cleanly on top
+of the page background.
 
 ## Apple touch icon
 
