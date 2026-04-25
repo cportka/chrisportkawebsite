@@ -75,7 +75,7 @@ p { margin: 0 0 1em; }
 /* ---------- Layout rhythm ---------- */
 main { display: block; }
 section {
-  padding: clamp(4rem, 9vw, 8rem) var(--gutter);
+  padding: clamp(2rem, 5vw, 4rem) var(--gutter);
   max-width: var(--wide);
   margin: 0 auto;
 }
@@ -407,13 +407,14 @@ h1#name {
 }
 
 /* ---------- Home press section ---------- */
-.home-press {
-  max-width: 38rem;
-}
+/* Section uses the wide container (margin: 0 auto on the section
+   centers it on the page); the inner content is the narrow column,
+   which sits at the start edge — same rhythm as bio paragraphs. */
 .press-quotes {
   list-style: none;
   padding: 0;
   margin: 0 0 2rem;
+  max-width: 38rem;
 }
 .press-quotes li { margin: 0 0 2.25rem; }
 .press-quotes li:last-child { margin-bottom: 1.5rem; }
