@@ -671,6 +671,30 @@ h1#name {
   color: var(--accent);
 }
 
+/* Inline epigraph variant — quiet quote stack above an album list. */
+.press-quotes--inline {
+  max-width: var(--measure);
+  margin: 0 0 3rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule);
+}
+.press-quotes--inline li { margin: 0 0 1.25rem; }
+.press-quotes--inline li:last-child { margin-bottom: 0; }
+.press-quotes--inline blockquote p {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 0.35rem;
+}
+.press-quotes--inline cite {
+  font-size: 0.7rem;
+}
+.press-quotes--inline cite a {
+  color: var(--ink-muted);
+  text-decoration-color: var(--rule);
+}
+.press-quotes--inline cite a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
 /* Full-page press quote list (variant of homepage press) */
 .press-quotes--full {
   max-width: var(--measure);
