@@ -651,6 +651,26 @@ h1#name {
   text-decoration-color: rgba(181, 157, 209, 0.35);
 }
 
+/* Contact-style row inside the discography list (no thumbnail column,
+   inherits the same border/padding rhythm as a release row). */
+.earlier-list .release-item--contact a {
+  grid-template-columns: 1fr;
+  padding: 1.25rem 0;
+}
+@media (min-width: 640px) {
+  .earlier-list .release-item--contact a { grid-template-columns: 1fr; }
+}
+.earlier-list .release-item--contact .note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+  font-size: 1.0625rem;
+}
+.earlier-list .release-item--contact a:hover .note {
+  color: var(--accent);
+}
+
 /* Full-page press quote list (variant of homepage press) */
 .press-quotes--full {
   max-width: var(--measure);
