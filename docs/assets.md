@@ -18,7 +18,7 @@ The script writes all four files into `assets/`:
 | `portrait-hero.jpg` | 2000×2000 | Universal fallback |
 | `portrait-hero.webp` | 2000×2000 | Modern browsers prefer it |
 | `portrait-hero.avif` | 2000×2000 | Newest browsers prefer it (smallest) |
-| `og-portrait.jpg` | 1200×1200 | Link previews (Twitter, iMessage, Slack, press) |
+| `og-image.jpg` | 1200×630 | Link previews (Twitter, iMessage, Slack, press) |
 
 WebP and AVIF generation is optional — the script skips cleanly if
 `cwebp`/`avifenc` aren't installed. Installing them is recommended: the

@@ -12,7 +12,7 @@
 #   assets/portrait-hero.jpg   2000x2000, ~80-150KB
 #   assets/portrait-hero.webp  same dims
 #   assets/portrait-hero.avif  same dims
-#   assets/og-portrait.jpg     1200x1200 center-crop for link previews
+#   assets/og-image.jpg        1200x630 (top-anchored) for link previews
 #
 # Requires: ImageMagick. Optionally: cwebp (WebP), avifenc (AVIF).
 #   macOS:  brew install imagemagick webp libavif
@@ -67,12 +67,13 @@ else
   echo "    install: brew install libavif"
 fi
 
-# 4. OG image — 1200x1200 center-crop (square works fine for OG).
-"$MAGICK" "$SRC" -auto-orient -resize 1200x1200^ -gravity center -extent 1200x1200 \
-  -strip -quality 85 "$OUT/og-portrait.jpg"
-echo "  wrote $OUT/og-portrait.jpg ($(wc -c < "$OUT/og-portrait.jpg" | awk '{printf "%.0fKB", $1/1024}'))"
+# 4. OG image — 1200x630 (Twitter/Slack/iMessage preferred ratio).
+#    Anchored toward the upper portion so the face stays in frame.
+"$MAGICK" "$SRC" -auto-orient -resize 1200x1200^ -gravity north -extent 1200x630 \
+  -strip -quality 85 "$OUT/og-image.jpg"
+echo "  wrote $OUT/og-image.jpg ($(wc -c < "$OUT/og-image.jpg" | awk '{printf "%.0fKB", $1/1024}'))"
 
 echo
 echo "Done. Commit the new assets:"
-echo "  git add assets/portrait-hero.* assets/og-portrait.jpg"
+echo "  git add assets/portrait-hero.* assets/og-image.jpg"
 echo "  git commit -m 'Add hero portrait assets'"
