@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Cover placeholder">
+  <defs>
+    <radialGradient id="ep" cx="50%" cy="50%" r="65%">
+      <stop offset="0" stop-color="#1f1a2a"/>
+      <stop offset="1" stop-color="#0a070f"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#ep)"/>
+  <rect x="16" y="16" width="368" height="368" fill="none" stroke="#b59dd1" stroke-width="1" stroke-opacity="0.18"/>
+  <g fill="#7a6f80" font-family="'Cormorant Garamond', Georgia, serif" text-anchor="middle">
+    <text x="200" y="210" font-size="28" font-style="italic" font-weight="300">cover</text>
+    <text x="200" y="240" font-size="11" letter-spacing="3">CHRIS PORTKA</text>
+  </g>
+</svg>
