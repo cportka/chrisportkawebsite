@@ -8,18 +8,22 @@
   <meta name="theme-color" content="#100c17">
   <link rel="canonical" href="https://chrisportka.com/">
 
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="profile">
   <meta property="og:title" content="Chris Portka — Bay Area songwriter">
-  <meta property="og:description" content="Songs from Berkeley, California. New album The Album Everyone Wants out now on vinyl and streaming.">
+  <meta property="og:description" content="Songwriter and multi-instrumentalist based in Berkeley, California. Latest album: The Album Everyone Wants (2025).">
   <meta property="og:url" content="https://chrisportka.com/">
-  <meta property="og:image" content="https://chrisportka.com/assets/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://chrisportka.com/assets/portrait-hero.jpg">
+  <meta property="og:image:width" content="2000">
+  <meta property="og:image:height" content="2000">
+  <meta property="og:site_name" content="Chris Portka">
+  <meta property="profile:first_name" content="Chris">
+  <meta property="profile:last_name" content="Portka">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chris Portka — Bay Area songwriter">
-  <meta name="twitter:description" content="Songs from Berkeley, California. New album The Album Everyone Wants out now.">
-  <meta name="twitter:image" content="https://chrisportka.com/assets/og-image.jpg">
+  <meta name="twitter:description" content="Songwriter and multi-instrumentalist based in Berkeley, California. Latest album: The Album Everyone Wants (2025).">
+  <meta name="twitter:image" content="https://chrisportka.com/assets/portrait-hero.jpg">
+  <meta name="twitter:site" content="@chrisportka">
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -33,37 +37,312 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    "name": "Chris Portka",
-    "url": "https://chrisportka.com",
-    "image": "https://chrisportka.com/assets/portrait-hero.jpg",
-    "description": "Bay Area songwriter and multi-instrumentalist. Latest record: The Album Everyone Wants (2025).",
-    "genre": ["Folk", "Psychedelic Rock", "Indie Rock", "Experimental"],
-    "foundingLocation": {
-      "@type": "Place",
-      "name": "Berkeley, California, USA"
-    },
-    "sameAs": [
-      "https://open.spotify.com/artist/43at57fnGGql0yMxsOt9CS",
-      "https://music.apple.com/us/artist/chris-portka/1528866398",
-      "https://cportka.bandcamp.com",
-      "https://tidal.com/browse/artist/21030421",
-      "https://www.instagram.com/chrisportka",
-      "https://www.youtube.com/@chrisportka",
-      "https://twitter.com/chrisportka"
-    ],
-    "album": [
+    "@graph": [
       {
-        "@type": "MusicAlbum",
-        "name": "The Album Everyone Wants",
-        "datePublished": "2025-09-22",
-        "url": "https://cportka.bandcamp.com/album/the-album-everyone-wants"
+        "@type": ["Person", "MusicGroup"],
+        "@id": "https://chrisportka.com/#person",
+        "name": "Chris Portka",
+        "url": "https://chrisportka.com",
+        "image": "https://chrisportka.com/assets/portrait-hero.jpg",
+        "description": "Bay Area songwriter and multi-instrumentalist. Folk, psych, experimental rock, and ambient.",
+        "jobTitle": "Songwriter",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Berkeley",
+          "addressRegion": "CA",
+          "addressCountry": "US"
+        },
+        "email": "hello@chrisportka.com",
+        "sameAs": [
+          "https://cportka.bandcamp.com",
+          "https://open.spotify.com/artist/43at57fnGGql0yMxsOt9CS",
+          "https://music.apple.com/us/artist/chris-portka/1528866398",
+          "https://tidal.com/browse/artist/21030421",
+          "https://www.instagram.com/chrisportka",
+          "https://www.youtube.com/@chrisportka",
+          "https://twitter.com/chrisportka"
+        ],
+        "genre": ["Folk", "Psychedelic Rock", "Experimental Rock", "Ambient"]
       },
       {
         "@type": "MusicAlbum",
+        "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album",
+        "name": "The Album Everyone Wants",
+        "url": "https://chrisportka.com/releases/the-album-everyone-wants",
+        "image": "https://chrisportka.com/assets/albums/small-album-ew-cover.jpg",
+        "byArtist": { "@id": "https://chrisportka.com/#person" },
+        "datePublished": "2025-09-24",
+        "numTracks": 11,
+        "recordingLocation": ["Sear Sound, New York, NY", "Brothers (Chinese) Recording, Oakland, CA"],
+        "producer": [
+          { "@type": "Person", "name": "Chris Portka" },
+          { "@type": "Person", "name": "Jasper Leach" }
+        ],
+        "albumProductionType": "https://schema.org/StudioAlbum",
+        "albumReleaseType": "https://schema.org/AlbumRelease",
+        "track": [
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/she-looks-so-good-tonight#track",
+            "name": "She Looks So Good Tonight",
+            "url": "https://cportka.bandcamp.com/track/she-looks-so-good-tonight",
+            "duration": "PT3M36S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 1
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/fun-in-the-summer#track",
+            "name": "Fun in the Summer",
+            "url": "https://cportka.bandcamp.com/track/fun-in-the-summer",
+            "duration": "PT3M01S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 2
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/it-is-obvious#track",
+            "name": "It Is Obvious",
+            "url": "https://cportka.bandcamp.com/track/it-is-obvious",
+            "duration": "PT2M42S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 3,
+            "creditedTo": { "@type": "Person", "name": "Syd Barrett" }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/dear-betty-baby#track",
+            "name": "Dear Betty Baby",
+            "url": "https://cportka.bandcamp.com/track/dear-betty-baby",
+            "duration": "PT4M14S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 4,
+            "creditedTo": { "@type": "Person", "name": "Mayo Thompson" }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/song-for-carol#track",
+            "name": "Song for Carol",
+            "url": "https://cportka.bandcamp.com/track/song-for-carol",
+            "duration": "PT2M34S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 5
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/poor-moon#track",
+            "name": "Poor Moon",
+            "url": "https://cportka.bandcamp.com/track/poor-moon",
+            "duration": "PT3M36S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 6,
+            "creditedTo": [
+              { "@type": "Person", "name": "Alan Wilson" },
+              { "@type": "MusicGroup", "name": "Canned Heat" }
+            ]
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/trucker-speed#track",
+            "name": "Trucker Speed",
+            "url": "https://cportka.bandcamp.com/track/trucker-speed",
+            "duration": "PT3M46S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 7,
+            "creditedTo": { "@type": "Person", "name": "Fred Eaglesmith" }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/broken-heart#track",
+            "name": "Broken Heart",
+            "url": "https://cportka.bandcamp.com/track/broken-heart",
+            "duration": "PT3M18S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 8,
+            "creditedTo": { "@type": "Person", "name": "Skip Spence" }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/tennessee-whiskey#track",
+            "name": "Tennessee Whiskey",
+            "url": "https://cportka.bandcamp.com/track/tennessee-whiskey",
+            "duration": "PT3M54S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 9,
+            "creditedTo": { "@type": "Person", "name": "George Jones" }
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/the-observer#track",
+            "name": "The Observer",
+            "url": "https://cportka.bandcamp.com/track/the-observer",
+            "duration": "PT4M37S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 10
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/molly#track",
+            "name": "Molly",
+            "url": "https://cportka.bandcamp.com/track/molly",
+            "duration": "PT3M33S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/the-album-everyone-wants#album" },
+            "position": 11,
+            "creditedTo": { "@type": "MusicGroup", "name": "Brasil" }
+          }
+        ]
+      },
+      {
+        "@type": "MusicAlbum",
+        "@id": "https://chrisportka.com/releases/trash-music#album",
         "name": "Trash Music",
-        "datePublished": "2023-08-01",
-        "url": "https://cportka.bandcamp.com/album/trash-music"
+        "url": "https://chrisportka.com/releases/trash-music",
+        "image": "https://chrisportka.com/assets/albums/small-trash-music-cover.jpg",
+        "byArtist": { "@id": "https://chrisportka.com/#person" },
+        "datePublished": "2023-07-27",
+        "numTracks": 12,
+        "genre": ["Lo-fi", "Folk", "Outsider"],
+        "albumProductionType": "https://schema.org/StudioAlbum",
+        "track": [
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/to-burn-him-up-is-it-too-much-to-bear#track",
+            "name": "to burn him up, is it too much to bear?",
+            "url": "https://cportka.bandcamp.com/track/to-burn-him-up-is-it-too-much-to-bear",
+            "duration": "PT1M55S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 1
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/wildlife#track",
+            "name": "wildlife",
+            "url": "https://cportka.bandcamp.com/track/wildlife",
+            "duration": "PT1M14S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 2
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/the-sky-is-blue-in-hell#track",
+            "name": "the sky is blue in hell",
+            "url": "https://cportka.bandcamp.com/track/the-sky-is-blue-in-hell",
+            "duration": "PT3M11S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 3
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/bojeum#track",
+            "name": "bojeum",
+            "url": "https://cportka.bandcamp.com/track/bojeum",
+            "duration": "PT2M46S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 4
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/life-is-the-anything-else#track",
+            "name": "life is the anything else",
+            "url": "https://cportka.bandcamp.com/track/life-is-the-anything-else",
+            "duration": "PT1M19S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 5
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/dream-factory#track",
+            "name": "dream factory",
+            "url": "https://cportka.bandcamp.com/track/dream-factory",
+            "duration": "PT6M02S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 6
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/women-are-hot#track",
+            "name": "women are hot",
+            "url": "https://cportka.bandcamp.com/track/women-are-hot",
+            "duration": "PT1M57S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 7
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/were-in-this-together#track",
+            "name": "we're in this together",
+            "url": "https://cportka.bandcamp.com/track/were-in-this-together",
+            "duration": "PT4M15S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 8
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/your-music-is-trash#track",
+            "name": "your music is trash",
+            "url": "https://cportka.bandcamp.com/track/your-music-is-trash",
+            "duration": "PT1M50S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 9
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/disco-trash-metal-reversal#track",
+            "name": "disco trash metal reversal",
+            "url": "https://cportka.bandcamp.com/track/disco-trash-metal-reversal",
+            "duration": "PT0M42S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 10
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/hold-my-hand#track",
+            "name": "hold my hand",
+            "url": "https://cportka.bandcamp.com/track/hold-my-hand",
+            "duration": "PT1M36S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 11
+          },
+          {
+            "@type": "MusicRecording",
+            "@id": "https://cportka.bandcamp.com/track/lets-go-play-today#track",
+            "name": "let's go play today",
+            "url": "https://cportka.bandcamp.com/track/lets-go-play-today",
+            "duration": "PT3M52S",
+            "byArtist": { "@id": "https://chrisportka.com/#person" },
+            "inAlbum": { "@id": "https://chrisportka.com/releases/trash-music#album" },
+            "position": 12
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://chrisportka.com/#website",
+        "url": "https://chrisportka.com",
+        "name": "Chris Portka",
+        "publisher": { "@id": "https://chrisportka.com/#person" }
       }
     ]
   }
@@ -146,19 +425,19 @@
       <li>
         <blockquote>
           <p>&ldquo;In an era of singles and branding, it feels radical to hear a record that values friendship and feeling above all.&rdquo;</p>
-          <cite>Hot Lunch Music</cite>
+          <cite><a href="https://hotlunchmusic.com/2025/10/06/chris-portka-the-album-everyone-wants-is-raw-organic-authentic-music-with-a-great-mix/" target="_blank" rel="noopener">Hot Lunch Music</a></cite>
         </blockquote>
       </li>
       <li>
         <blockquote>
           <p>&ldquo;Built from someone else&rsquo;s blueprints, then decorated the rooms his own way.&rdquo;</p>
-          <cite>bsideguys</cite>
+          <cite><a href="https://bsideguys.com/2025/10/03/album-review-chris-portka-the-album-everyone-wants/" target="_blank" rel="noopener">bsideguys</a></cite>
         </blockquote>
       </li>
       <li>
         <blockquote>
           <p>&ldquo;A love letter to music itself &mdash; a record that bends time, genre, and expectation while somehow staying grounded in the dust and gold of the American songbook.&rdquo;</p>
-          <cite>Fusion Nostalgia</cite>
+          <cite><a href="https://fusionostalgia.com/chris-portka-crafts-a-timeless-twisted-classic-in-the-album-everyone-wants/" target="_blank" rel="noopener">Fusion Nostalgia</a></cite>
         </blockquote>
       </li>
     </ol>
@@ -173,7 +452,7 @@
     <ol class="releases">
       <li class="release-item release-item--featured">
         <a href="/releases/the-album-everyone-wants">
-          <img src="/assets/albums/small-album-ew-cover.jpg" alt="" width="800" height="800" loading="lazy">
+          <img src="/assets/albums/small-album-ew-cover.jpg" alt="The Album Everyone Wants album cover" width="800" height="800" loading="lazy">
           <div class="release-meta">
             <h3>The Album Everyone Wants</h3>
             <p class="year">2025</p>
@@ -184,7 +463,7 @@
 
       <li class="release-item">
         <a href="/releases/trash-music">
-          <img src="/assets/albums/small-trash-music-cover.jpg" alt="" width="800" height="800" loading="lazy">
+          <img src="/assets/albums/small-trash-music-cover.jpg" alt="Trash Music album cover" width="800" height="800" loading="lazy">
           <div class="release-meta">
             <h3>Trash Music</h3>
             <p class="year">2023</p>
