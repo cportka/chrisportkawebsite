@@ -523,7 +523,7 @@ h1#name {
   .release-item--featured a { grid-template-columns: 11rem 1fr; }
   .release-item--featured img { width: 11rem; height: 11rem; }
   .release-item--video a {
-    grid-template-columns: minmax(0, 20rem) 1fr;
+    grid-template-columns: 1fr minmax(0, 20rem);
     gap: 1.5rem;
     align-items: start;
   }
