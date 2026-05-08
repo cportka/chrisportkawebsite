@@ -148,8 +148,28 @@ h1#name {
   font-weight: 300;
   font-size: clamp(1.25rem, 0.95rem + 0.85vw, 1.625rem);
   color: var(--ink-soft);
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
   letter-spacing: 0.005em;
+}
+.hero-quote {
+  margin: 0 0 2rem;
+  padding: 0;
+}
+.hero-quote p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 0.4rem;
+}
+.hero-quote cite {
+  font-size: 0.6875rem;
+  color: var(--ink-muted);
+  font-style: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .hero-note {
   font-size: 0.875rem;
