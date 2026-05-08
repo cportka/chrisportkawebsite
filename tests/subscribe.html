@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Subscribe form — test harness</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    .test-wrap {
+      max-width: 38rem;
+      margin: 0 auto;
+      padding: 3rem var(--gutter);
+    }
+    .test-wrap h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+    .test-wrap .lede-note {
+      color: var(--ink-soft);
+      margin-bottom: 2rem;
+      font-size: 0.9375rem;
+    }
+    .test-config {
+      background: var(--bg-raised);
+      border: 1px solid var(--rule);
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      margin: 0 0 1.5rem;
+      overflow-wrap: anywhere;
+    }
+    .test-config dt { color: var(--ink-muted); margin-top: 0.5rem; }
+    .test-config dt:first-child { margin-top: 0; }
+    .test-config dd { margin: 0.1rem 0 0; color: var(--ink); }
+    .test-log {
+      background: var(--bg-deep);
+      border: 1px solid var(--rule);
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      min-height: 8rem;
+      margin: 1.5rem 0;
+      white-space: pre-wrap;
+    }
+    .test-log .ok { color: #9bd9a3; }
+    .test-log .warn { color: #e8c46b; }
+    .test-log .err { color: #e89292; }
+    .test-log .ts { color: var(--ink-muted); }
+    .test-iframe {
+      width: 100%;
+      height: 18rem;
+      border: 1px solid var(--rule);
+      background: #fff;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+    .test-status {
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      margin: 1rem 0;
+      display: none;
+    }
+    .test-status.show { display: block; }
+    .test-status.pass { background: rgba(155, 217, 163, 0.12); color: #9bd9a3; border: 1px solid rgba(155, 217, 163, 0.3); }
+    .test-status.fail { background: rgba(232, 146, 146, 0.12); color: #e89292; border: 1px solid rgba(232, 146, 146, 0.3); }
+    .test-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1rem 0 0; }
+    .test-actions button {
+      font: inherit;
+      padding: 0.5rem 1rem;
+      background: transparent;
+      color: var(--ink-soft);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 0.8125rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .test-actions button:hover { color: var(--accent); border-color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<main class="test-wrap">
+  <h1>Subscribe form — test harness</h1>
+  <p class="lede-note">
+    This page submits to the <strong>real</strong> Google Form (same endpoint as
+    the live site). It will create a real row in the linked Google Sheet, marked
+    with a recognizable timestamp so you can find &amp; delete it after.
+    Open DevTools &rarr; Network to inspect the POST.
+  </p>
+
+  <dl class="test-config" id="test-config"></dl>
+
+  <form
+    id="subscribe-form"
+    action="https://docs.google.com/forms/d/e/1FAIpQLSekASuiQlaQbViFl5JQ0wZsY4YdR8EMfCF3rnSwQurMrU7T4Q/formResponse"
+    method="POST"
+    target="subscribe_sink"
+    class="subscribe">
+    <label for="email" class="visually-hidden">Email address</label>
+    <input type="email" name="entry.2065888469" id="email" required>
+    <button type="submit" class="button-primary">Submit test</button>
+  </form>
+
+  <div class="test-actions">
+    <button type="button" id="refill">Refill marker</button>
+    <button type="button" id="clear-log">Clear log</button>
+  </div>
+
+  <div class="test-status" id="status" role="status" aria-live="polite"></div>
+
+  <h2 style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.25rem; margin: 2rem 0 0.5rem;">Event log</h2>
+  <pre class="test-log" id="log" aria-live="polite"></pre>
+
+  <h2 style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.25rem; margin: 2rem 0 0.5rem;">Iframe response</h2>
+  <p class="lede-note" style="margin: 0 0 0.5rem;">
+    On a successful submission, Google&rsquo;s confirmation page loads in the
+    iframe below. Cross-origin policy prevents reading its content, but the
+    iframe&rsquo;s <code>load</code> event firing after submit = success.
+  </p>
+  <iframe name="subscribe_sink" id="subscribe_sink" class="test-iframe" title="Test sink"></iframe>
+
+  <h2 style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.25rem; margin: 2rem 0 0.5rem;">What to verify</h2>
+  <ol style="color: var(--ink-soft); font-size: 0.9375rem; line-height: 1.7;">
+    <li>The event log shows <span class="ok">submit fired</span> then <span class="ok">iframe load (post-submit)</span>.</li>
+    <li>The status banner turns green (&ldquo;Submission appears successful&rdquo;).</li>
+    <li>Open the linked Google Sheet and confirm a new row exists with the marker email shown above.</li>
+    <li>Delete the test row from the sheet when done.</li>
+  </ol>
+</main>
+
+<script>
+(function() {
+  var form  = document.getElementById('subscribe-form');
+  var input = document.getElementById('email');
+  var sink  = document.getElementById('subscribe_sink');
+  var log   = document.getElementById('log');
+  var status = document.getElementById('status');
+  var cfg   = document.getElementById('test-config');
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function stamp() {
+    var d = new Date();
+    return d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate())
+         + '-' + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds());
+  }
+  function marker() {
+    return 'subscribe-test+' + stamp() + '@chrisportka.com';
+  }
+  function fillMarker() { input.value = marker(); }
+
+  function logLine(msg, cls) {
+    var d = new Date();
+    var ts = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds()) + '.' + String(d.getMilliseconds()).padStart(3,'0');
+    var line = document.createElement('div');
+    var t = document.createElement('span');
+    t.className = 'ts'; t.textContent = '[' + ts + '] ';
+    var m = document.createElement('span');
+    if (cls) m.className = cls;
+    m.textContent = msg;
+    line.appendChild(t); line.appendChild(m);
+    log.appendChild(line);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function setStatus(text, kind) {
+    status.textContent = text;
+    status.className = 'test-status show ' + kind;
+  }
+
+  // Show config
+  cfg.innerHTML =
+    '<dt>Form action</dt><dd>' + form.action + '</dd>' +
+    '<dt>Email field name</dt><dd>' + input.name + '</dd>' +
+    '<dt>Method</dt><dd>POST</dd>' +
+    '<dt>Target frame</dt><dd>' + form.target + '</dd>';
+
+  fillMarker();
+  document.getElementById('refill').addEventListener('click', function() {
+    fillMarker();
+    logLine('marker refilled: ' + input.value);
+  });
+  document.getElementById('clear-log').addEventListener('click', function() {
+    log.innerHTML = '';
+    status.className = 'test-status';
+  });
+
+  var submitted = false;
+  var submitTime = 0;
+
+  form.addEventListener('submit', function(e) {
+    if (!input.value) { e.preventDefault(); logLine('blocked: empty email', 'err'); return; }
+    submitted = true;
+    submitTime = Date.now();
+    logLine('submit fired with email: ' + input.value, 'ok');
+    setStatus('Submitting...', 'pass');
+  });
+
+  sink.addEventListener('load', function() {
+    if (!submitted) {
+      logLine('iframe load (initial empty load — expected, ignoring)', 'warn');
+      return;
+    }
+    var ms = Date.now() - submitTime;
+    logLine('iframe load (post-submit) — ' + ms + 'ms', 'ok');
+    setStatus(
+      'Submission appears successful. Open the Google Sheet and look for the row with email "' + input.value + '" — delete it after verifying.',
+      'pass'
+    );
+  });
+
+  sink.addEventListener('error', function() {
+    logLine('iframe error event', 'err');
+    setStatus('Iframe error — submission likely did NOT reach Google.', 'fail');
+  });
+
+  // 15s timeout: if no load event after submit, mark suspect
+  form.addEventListener('submit', function() {
+    setTimeout(function() {
+      var ms = Date.now() - submitTime;
+      if (submitted && ms > 14000) {
+        logLine('no iframe load event after 15s — submission may have failed', 'err');
+        setStatus('No iframe response after 15s. Check Network tab and the Google Sheet manually.', 'fail');
+      }
+    }, 15000);
+  });
+
+  logLine('test harness ready');
+})();
+</script>
+
+</body>
+</html>
