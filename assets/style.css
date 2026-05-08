@@ -445,7 +445,7 @@ h1#name {
   max-width: 38rem;
 }
 .press-quotes li { margin: 0 0 2.25rem; }
-.press-quotes li:last-child { margin-bottom: 1.5rem; }
+.press-quotes li:last-child { margin-bottom: 3.5rem; }
 .press-quotes blockquote { margin: 0; padding: 0; }
 .press-quotes blockquote p {
   font-family: var(--serif);
@@ -619,6 +619,7 @@ h1#name {
   font-size: 0.9375rem;
 }
 .outro-direct a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.outro-direct--spaced { margin-top: 2.25rem; }
 
 #subscribe_sink {
   display: none;
