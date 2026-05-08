@@ -171,6 +171,14 @@ h1#name {
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+.hero-quote cite a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+}
+.hero-quote cite a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
 .hero-note {
   font-size: 0.875rem;
   letter-spacing: 0.06em;
