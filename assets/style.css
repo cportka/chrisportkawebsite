@@ -151,6 +151,24 @@ h1#name {
   margin: 0 0 1.5rem;
   letter-spacing: 0.005em;
 }
+/* California outline + "Musician, Songwriter, Guy" tagline overlay.
+   Sits between the name and the Berman quote — on desktop it left-aligns
+   with the name column, on mobile it centers under the name. A small
+   negative top margin lets the state's top edge nestle up under "Portka"
+   so the two read as one composition rather than two stacked blocks. */
+.hero-cali {
+  margin: -1rem 0 1.75rem;
+  line-height: 0;
+}
+.hero-cali svg {
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+}
+
 .hero-quote {
   margin: 0 0 2rem;
   padding: 0;
@@ -222,6 +240,14 @@ h1#name {
     padding: var(--gutter) clamp(2rem, 5vw, 5rem);
   }
   h1#name { font-size: clamp(4.5rem, 7vw, 8rem); }
+  .hero-cali {
+    margin: -1.5rem 0 2.25rem;
+  }
+  .hero-cali svg {
+    max-width: 26rem;
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
 
 /* ---------- Release page header (deep pages) ---------- */
