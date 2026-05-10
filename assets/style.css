@@ -152,20 +152,19 @@ h1#name {
   letter-spacing: 0.005em;
 }
 /* California outline + "Musician, Songwriter, Guy" tagline overlay.
-   Sits between the name and the Berman quote — on desktop it left-aligns
-   with the name column, on mobile it centers under the name. A small
-   negative top margin lets the state's top edge nestle up under "Portka"
-   so the two read as one composition rather than two stacked blocks. */
+   The name is forced onto two lines ("Chris" / "Portka"). The state's
+   top vertex pulls up so it lands just to the left of "Portka" and
+   the state extends downward; the inline tagline (at y=148 of the
+   280-unit viewBox) then naturally falls below the name. */
 .hero-cali {
-  margin: -1rem 0 1.75rem;
+  margin: -3.75rem 0 1.5rem -0.75rem;
   line-height: 0;
 }
 .hero-cali svg {
   width: 100%;
-  max-width: 22rem;
+  max-width: 20rem;
   height: auto;
   display: block;
-  margin: 0 auto;
   overflow: visible;
 }
 
@@ -241,12 +240,10 @@ h1#name {
   }
   h1#name { font-size: clamp(4.5rem, 7vw, 8rem); }
   .hero-cali {
-    margin: -1.5rem 0 2.25rem;
+    margin: -5.5rem 0 2rem -1.5rem;
   }
   .hero-cali svg {
-    max-width: 26rem;
-    margin-left: 0;
-    margin-right: auto;
+    max-width: 24rem;
   }
 }
 
