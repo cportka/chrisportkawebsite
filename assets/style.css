@@ -154,12 +154,16 @@ h1#name {
 /* California outline + "Musician, Songwriter, Guy" tagline overlay.
    The name is forced onto two lines ("Chris" / "Portka"). The state's
    top vertex pulls up by one line of the name (calc'd against the
-   actual font-size clamp so it scales with viewport) plus the name's
-   bottom margin, so its top lands at "Portka"'s top regardless of
-   screen size. The inline tagline (at y=148 of the 280-unit viewBox)
-   then naturally falls below the name. */
+   actual font-size clamp so it scales with viewport) plus a little
+   slack, so its top lands at "Portka"'s top regardless of screen
+   size. The inline tagline (at y=148 of the 280-unit viewBox) then
+   naturally falls below the name.
+
+   On mobile the SVG is centered horizontally so the state sits behind
+   the centered name; on desktop it's left-aligned to track the
+   left-aligned hero column. */
 .hero-cali {
-  margin: calc(-1 * clamp(3.5rem, 7vw + 1rem, 7rem) - 1.25rem) 0 1.5rem -0.75rem;
+  margin: calc(-1 * clamp(3.5rem, 7vw + 1rem, 7rem) - 1.75rem) auto 1.5rem;
   line-height: 0;
 }
 .hero-cali svg {
