@@ -159,16 +159,18 @@ h1#name {
    size. The inline tagline (at y=148 of the 280-unit viewBox) then
    naturally falls below the name.
 
-   On mobile the SVG is centered horizontally so the state sits behind
-   the centered name; on desktop it's left-aligned to track the
+   On mobile the SVG is shrunk and right-aligned in the centered hero
+   column so the polygon (which lives in the left half of its own
+   viewBox) lands behind the centered name rather than off to the
+   side. On desktop the SVG is wider and left-aligned to track the
    left-aligned hero column. */
 .hero-cali {
-  margin: calc(-1 * clamp(3.5rem, 7vw + 1rem, 7rem) - 1.75rem) auto 1.5rem;
+  margin: calc(-1 * clamp(3.5rem, 7vw + 1rem, 7rem) - 2rem) 0 1.5rem auto;
   line-height: 0;
 }
 .hero-cali svg {
   width: 100%;
-  max-width: 20rem;
+  max-width: 16rem;
   height: auto;
   display: block;
   overflow: visible;
