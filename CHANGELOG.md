@@ -4,6 +4,16 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.0.2] - 2026-06-28
+
+### Changed
+- Reworked the hero smoke to actually look like smoke and stop overpowering the portrait. Swapped
+  the lavender gradient blobs (which only ever read as a glow) for SVG `feTurbulence` fractal-noise
+  wisps, stretched vertically so they read as rising plumes, drifting upward via a seamless tiled
+  `background-position` loop. Dropped the intensity, and masked the layer with a radial fade so the
+  smoke dissipates before any edge — fixing the hard rectangular edge at the bottom of the hero.
+  Still CSS/SVG-only and `prefers-reduced-motion` safe.
+
 ## [1.0.1] - 2026-06-28
 
 ### Fixed
