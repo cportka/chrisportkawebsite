@@ -126,6 +126,43 @@ section {
   background: linear-gradient(to bottom, transparent, var(--bg) 95%);
   pointer-events: none;
 }
+/* Soft smoke wafting over the portrait. Two blurred lavender gradient
+   layers drift on offset cycles so the motion never visibly loops.
+   `screen` blend lets the smoke lighten the photo like real haze; it
+   sits above the img but below .portrait::after's bottom fade (DOM
+   order), so the fade-to-bg edge stays clean. */
+.portrait-smoke {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+.portrait-smoke::before,
+.portrait-smoke::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(38% 32% at 30% 72%, rgba(181, 157, 209, 0.20), transparent 60%),
+    radial-gradient(30% 26% at 66% 56%, rgba(212, 189, 240, 0.15), transparent 62%),
+    radial-gradient(44% 30% at 50% 88%, rgba(181, 157, 209, 0.13), transparent 66%);
+  filter: blur(9px);
+  will-change: transform, opacity;
+}
+.portrait-smoke::before { animation: smoke-drift-a 26s ease-in-out infinite; }
+.portrait-smoke::after  { animation: smoke-drift-b 34s ease-in-out infinite; opacity: 0.7; }
+@keyframes smoke-drift-a {
+  0%   { transform: translate3d(0, 8%, 0) scale(1);     opacity: 0.35; }
+  50%  { transform: translate3d(3%, -6%, 0) scale(1.12); opacity: 0.6; }
+  100% { transform: translate3d(0, 8%, 0) scale(1);     opacity: 0.35; }
+}
+@keyframes smoke-drift-b {
+  0%   { transform: translate3d(0, 6%, 0) scale(1.06);   opacity: 0.25; }
+  50%  { transform: translate3d(-4%, -9%, 0) scale(0.94); opacity: 0.5; }
+  100% { transform: translate3d(0, 6%, 0) scale(1.06);   opacity: 0.25; }
+}
 .hero-text {
   padding: clamp(2rem, 6vw, 4rem) var(--gutter) clamp(3rem, 8vw, 5rem);
   text-align: center;
@@ -174,6 +211,49 @@ h1#name {
   height: auto;
   display: block;
   overflow: visible;
+}
+/* Soft neon flicker + glow on the California outline. The stroke holds a
+   gentle lavender glow most of the cycle, with two brief, soft flicker
+   dips — like a neon tube settling. overflow:visible on the svg above
+   keeps the drop-shadow halo from clipping. */
+.cali-outline {
+  animation: cali-neon 7s ease-in-out infinite;
+}
+@keyframes cali-neon {
+  0%, 46% {
+    stroke: #bfa6e0;
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
+            drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
+  }
+  48% { stroke: #7d68a0; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.3)); }
+  50% {
+    stroke: #d4bdf0;
+    filter: drop-shadow(0 0 4px rgba(212, 189, 240, 0.95))
+            drop-shadow(0 0 11px rgba(181, 157, 209, 0.55));
+  }
+  52% { stroke: #7d68a0; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.3)); }
+  54%, 82% {
+    stroke: #bfa6e0;
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
+            drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
+  }
+  84% { stroke: #8a73ad; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
+  86%, 100% {
+    stroke: #bfa6e0;
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
+            drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
+  }
+}
+/* Respect reduced-motion: hold the smoke and neon glow still, keeping a
+   faint resting halo on the outline rather than a hard cut. */
+@media (prefers-reduced-motion: reduce) {
+  .portrait-smoke::before,
+  .portrait-smoke::after { animation: none; }
+  .cali-outline {
+    animation: none;
+    stroke: #bfa6e0;
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.6));
+  }
 }
 
 .hero-quote {
