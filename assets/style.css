@@ -539,31 +539,6 @@ h1#name {
 }
 .bio em { font-style: italic; color: var(--ink); }
 
-/* ---------- FAQ (visible mirror of the FAQPage JSON-LD) ----------
-   Reuses .bio's surrounding rhythm so the section feels like a continuation
-   of the About copy. Questions sit in serif italic to echo the rest of the
-   site's voice; answers use the body font for legibility. */
-.faq-list {
-  max-width: var(--measure);
-  margin: 0;
-}
-.faq-list dt {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
-  color: var(--ink);
-  margin: 1.75rem 0 0.35rem;
-}
-.faq-list dt:first-child { margin-top: 0; }
-.faq-list dd {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--ink-soft);
-}
-.faq-list dd em { font-style: italic; color: var(--ink); }
-
 .press { margin-top: 2.5rem; max-width: var(--measure); }
 .press blockquote { margin: 0 0 1.5rem; padding: 0; }
 .press blockquote p {

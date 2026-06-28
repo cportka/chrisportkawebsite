@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.0.3] - 2026-06-28
+
+### Removed
+- The homepage "Frequently asked" section, plus its matching `FAQPage` JSON-LD and `.faq-list`
+  CSS. Removed the structured data alongside the visible section so nothing is left dangling.
+
 ## [1.0.2] - 2026-06-28
 
 ### Changed
