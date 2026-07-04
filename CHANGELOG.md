@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.0.5] - 2026-07-04
+
+### Changed
+- Vignette the hero portrait into black on all four edges instead of only one. The photo used to
+  fade on a single side (bottom on mobile, right on desktop) and hard-cut on the rest — most
+  visibly a hard vertical seam where the desktop photo met the name column. Rebuilt `.portrait::after`
+  as a two-gradient edge fade (tuned per layout) so the photo dissolves to background on every side.
+
 ## [1.0.4] - 2026-06-28
 
 ### Fixed
