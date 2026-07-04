@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.0.6] - 2026-07-04
+
+### Changed
+- Strengthened the desktop hero vignette: the right edge (meeting the name column) and the bottom
+  edge now pull a long fade to black inward toward the subject, instead of the subtle single-side
+  fade that was hard to see. Left and top keep a gentle vignette. Verified at tall-window and
+  wide-laptop desktop sizes.
+
 ## [1.0.5] - 2026-07-04
 
 ### Changed
