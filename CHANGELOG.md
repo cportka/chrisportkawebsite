@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.0.4] - 2026-06-28
+
+### Fixed
+- Red band at the hero image / name section seam on iOS Safari. It was the smoke layer's
+  `mix-blend-mode: screen` combining with its CSS `mask` — a known iOS compositing bug that renders
+  a colored band at the mask edge. Dropped the blend (the light wisps read the same over the dark
+  photo with plain alpha, opacity nudged up to match) and isolated the layer, so the portrait now
+  fades cleanly into the section below on both mobile and desktop.
+
 ## [1.0.3] - 2026-06-28
 
 ### Removed
