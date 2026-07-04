@@ -104,6 +104,13 @@ section {
   margin: 0;
   display: grid;
   grid-template-columns: 1fr;
+  /* Solid, uniform background across the whole hero so the two desktop
+     columns match. Without this the text column shows the body's lavender
+     radial glow (slightly lighter than the portrait's fade-to-bg edge),
+     which reads as a vertical seam where the columns meet. The portrait
+     fades to this same var(--bg), so the photo now dissolves seamlessly
+     into the column beside it. */
+  background: var(--bg);
 }
 .portrait {
   margin: 0;

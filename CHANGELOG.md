@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.0.7] - 2026-07-04
+
+### Fixed
+- Vertical seam to the right of the desktop hero. The portrait faded to `--bg`, but the text column
+  showed the body's lavender radial glow (slightly lighter), so the columns met on a visible line.
+  Gave `.hero` a solid `var(--bg)` background so both columns match and the photo fades to black
+  into the column beside it. Confirmed against a cache-free render at a tall desktop window.
+
 ## [1.0.6] - 2026-07-04
 
 ### Changed
