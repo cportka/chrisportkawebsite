@@ -46,6 +46,27 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
 }
+/* Film grain — a whisper of 35mm noir texture over everything. Sparse
+   light specks (baked into the noise's alpha) drift on a slow shuffle,
+   so it reads as living grain without washing out the dark palette. No
+   blend mode (keeps it iOS-safe); kept very faint on purpose. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch' result='n'/><feColorMatrix in='n' type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 -0.36'/></filter><rect width='150' height='150' filter='url(%23g)'/></svg>");
+  background-size: 150px 150px;
+  animation: film-grain 1.1s steps(3) infinite;
+}
+@keyframes film-grain {
+  0%   { background-position: 0 0; }
+  33%  { background-position: -38px 26px; }
+  66%  { background-position: 22px -32px; }
+  100% { background-position: 0 0; }
+}
 img { max-width: 100%; height: auto; display: block; }
 a {
   color: var(--accent);
@@ -93,8 +114,20 @@ section {
   display: block;
   width: 2.5rem;
   height: 1px;
-  background: var(--accent-deep);
+  background: var(--accent);
+  box-shadow: 0 0 5px rgba(181, 157, 209, 0.5), 0 0 10px rgba(181, 157, 209, 0.28);
   margin-top: 1.5rem;
+  /* the accent rule reads as a small lit neon bar, with a slow, rare
+     flicker so the neon motif carries quietly down the page */
+  animation: rule-neon 9s ease-in-out infinite;
+}
+@keyframes rule-neon {
+  0%, 62%, 68%, 100% {
+    background: var(--accent);
+    box-shadow: 0 0 5px rgba(181, 157, 209, 0.5), 0 0 10px rgba(181, 157, 209, 0.28);
+  }
+  64% { background: var(--accent-deep); box-shadow: 0 0 2px rgba(181, 157, 209, 0.2); }
+  66% { background: var(--accent-bright); box-shadow: 0 0 6px rgba(212, 189, 240, 0.6), 0 0 13px rgba(181, 157, 209, 0.35); }
 }
 
 /* ---------- Hero ---------- */
@@ -171,14 +204,14 @@ section {
 .portrait-smoke::before {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='s' filterUnits='userSpaceOnUse' x='0' y='0' width='600' height='600'><feTurbulence type='fractalNoise' baseFrequency='0.022 0.008' numOctaves='4' seed='4' stitchTiles='stitch' result='n'/><feColorMatrix in='n' type='matrix' values='0 0 0 0 0.84 0 0 0 0 0.75 0 0 0 0 0.92 0 0 0 1.3 -0.62'/></filter><rect width='600' height='600' filter='url(%23s)'/></svg>");
   background-size: 600px 600px;
-  opacity: 0.42;
+  opacity: 0.30;
   filter: blur(2.5px);
   animation: smoke-a 34s linear infinite;
 }
 .portrait-smoke::after {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='s' filterUnits='userSpaceOnUse' x='0' y='0' width='520' height='520'><feTurbulence type='fractalNoise' baseFrequency='0.032 0.013' numOctaves='3' seed='29' stitchTiles='stitch' result='n'/><feColorMatrix in='n' type='matrix' values='0 0 0 0 0.88 0 0 0 0 0.80 0 0 0 0 0.94 0 0 0 1.2 -0.66'/></filter><rect width='520' height='520' filter='url(%23s)'/></svg>");
   background-size: 520px 520px;
-  opacity: 0.32;
+  opacity: 0.22;
   filter: blur(1.5px);
   animation: smoke-b 52s linear infinite;
 }
@@ -207,6 +240,33 @@ h1#name {
   margin: 0 0 1.25rem;
   letter-spacing: -0.005em;
   color: var(--ink);
+  /* Neon-sign glow: a near-white tube with a lavender halo. The core
+     stays legible; the halo does the neon work. A slow, mostly-steady
+     flicker keeps it alive without buzzing. */
+  text-shadow:
+    0 0 5px rgba(212, 189, 240, 0.45),
+    0 0 16px rgba(181, 157, 209, 0.30),
+    0 0 34px rgba(181, 157, 209, 0.18);
+  animation: name-neon 11s ease-in-out infinite;
+}
+@keyframes name-neon {
+  0%, 43%, 47%, 78%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px rgba(212, 189, 240, 0.45),
+      0 0 16px rgba(181, 157, 209, 0.30),
+      0 0 34px rgba(181, 157, 209, 0.18);
+  }
+  45% {   /* one soft dip, like current settling in the tube */
+    opacity: 0.9;
+    text-shadow:
+      0 0 3px rgba(212, 189, 240, 0.30),
+      0 0 9px rgba(181, 157, 209, 0.18);
+  }
+  79.5% { opacity: 0.94;
+    text-shadow:
+      0 0 4px rgba(212, 189, 240, 0.35),
+      0 0 12px rgba(181, 157, 209, 0.22); }
 }
 .tagline {
   font-family: var(--serif);
@@ -216,6 +276,24 @@ h1#name {
   color: var(--ink-soft);
   margin: 0 0 1.5rem;
   letter-spacing: 0.005em;
+}
+/* "out now" as a small lavender neon sign beside the album title. Lit
+   accent glow with a couple of quick buzzes per cycle. */
+.neon-outnow {
+  color: var(--accent-bright);
+  text-shadow:
+    0 0 4px rgba(212, 189, 240, 0.75),
+    0 0 11px rgba(181, 157, 209, 0.5),
+    0 0 22px rgba(181, 157, 209, 0.3);
+  animation: neon-outnow 6.5s ease-in-out infinite;
+}
+@keyframes neon-outnow {
+  0%, 46%, 52%, 74%, 82%, 100% { opacity: 1; }
+  48% { opacity: 0.5; }   /* buzz one */
+  50% { opacity: 0.85; }
+  77% { opacity: 0.35; }  /* buzz two, a touch harder */
+  79% { opacity: 0.9; }
+  80% { opacity: 0.55; }
 }
 /* California outline + "Musician, Songwriter, Guy" tagline overlay.
    The name is forced onto two lines ("Chris" / "Portka"). The state's
@@ -249,29 +327,79 @@ h1#name {
   animation: cali-neon 7s ease-in-out infinite;
 }
 @keyframes cali-neon {
-  0%, 46% {
+  /* long steady glow */
+  0%, 40% {
     stroke: #bfa6e0;
     filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
             drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
   }
-  48% { stroke: #7d68a0; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.3)); }
-  50% {
-    stroke: #d4bdf0;
-    filter: drop-shadow(0 0 4px rgba(212, 189, 240, 0.95))
-            drop-shadow(0 0 11px rgba(181, 157, 209, 0.55));
+  /* ignition stutter — the tube fights to light, then a big flare */
+  41% { stroke: #5b4a75; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
+  43% { stroke: #e4d6f5; filter: drop-shadow(0 0 4px rgba(212, 189, 240, 0.9)) drop-shadow(0 0 9px rgba(181, 157, 209, 0.5)); }
+  44% { stroke: #4a3d5f; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.2)); }
+  46% { stroke: #d4bdf0; filter: drop-shadow(0 0 4px rgba(212, 189, 240, 0.85)) drop-shadow(0 0 8px rgba(181, 157, 209, 0.45)); }
+  47% { stroke: #453a58; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.18)); }
+  49% {   /* the big flare — sparks fly here */
+    stroke: #f0e7fb;
+    filter: drop-shadow(0 0 5px rgba(212, 189, 240, 1))
+            drop-shadow(0 0 14px rgba(181, 157, 209, 0.65))
+            drop-shadow(0 0 26px rgba(181, 157, 209, 0.4));
   }
   52% { stroke: #7d68a0; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.3)); }
-  54%, 82% {
+  55%, 79% {
     stroke: #bfa6e0;
     filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
             drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
   }
-  84% { stroke: #8a73ad; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
+  /* second, smaller flicker cluster — second spark burst */
+  80% { stroke: #6a5688; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
+  82% { stroke: #e4d6f5; filter: drop-shadow(0 0 4px rgba(212, 189, 240, 0.9)) drop-shadow(0 0 11px rgba(181, 157, 209, 0.55)); }
+  84% { stroke: #6a5688; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
   86%, 100% {
     stroke: #bfa6e0;
     filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
             drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
   }
+}
+/* Sparks off the NE corner, timed to the two flares (49% and 82%). Each
+   flies a slightly different way and burns out fast. */
+.cali-spark {
+  fill: #f6eeff;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(244, 236, 255, 1))
+          drop-shadow(0 0 5px rgba(181, 157, 209, 0.75));
+  animation: cali-spark-1 7s linear infinite;
+}
+.cali-spark--2 { animation-name: cali-spark-2; }
+.cali-spark--3 { animation-name: cali-spark-3; }
+@keyframes cali-spark-1 {
+  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.5); }
+  49% { opacity: 1; transform: translate(0,0) scale(1); }
+  54% { opacity: 0; transform: translate(13px,-9px) scale(0.2); }
+  81% { opacity: 0; transform: translate(0,0) scale(0.5); }
+  82% { opacity: 0.9; transform: translate(0,0) scale(0.9); }
+  87% { opacity: 0; transform: translate(10px,-6px) scale(0.2); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.5); }
+}
+@keyframes cali-spark-2 {
+  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  49% { opacity: 1; transform: translate(0,0) scale(0.9); }
+  55% { opacity: 0; transform: translate(15px,3px) scale(0.2); }
+  81% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  82% { opacity: 0.85; transform: translate(0,0) scale(0.8); }
+  88% { opacity: 0; transform: translate(11px,2px) scale(0.2); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes cali-spark-3 {
+  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  49.5% { opacity: 1; transform: translate(0,0) scale(0.8); }
+  56% { opacity: 0; transform: translate(12px,11px) scale(0.2); }
+  81% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  82.5% { opacity: 0.8; transform: translate(0,0) scale(0.7); }
+  89% { opacity: 0; transform: translate(9px,8px) scale(0.2); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
 /* Respect reduced-motion: hold the smoke and neon glow still, keeping a
    faint resting halo on the outline rather than a hard cut. */
@@ -283,6 +411,12 @@ h1#name {
     stroke: #bfa6e0;
     filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.6));
   }
+  /* Hold the new neon touches still, keeping their lit resting state. */
+  h1#name,
+  .neon-outnow,
+  .section-heading::after { animation: none; }
+  .cali-spark { animation: none; opacity: 0; }
+  body::after { animation: none; }
 }
 
 .hero-quote {

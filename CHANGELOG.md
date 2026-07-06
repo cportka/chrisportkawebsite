@@ -4,6 +4,20 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.1.0] - 2026-07-06
+
+### Added
+- Neon-noir touches across the homepage, all lavender-only and reduced-motion safe:
+  - "Chris Portka" now glows as a lavender neon sign, with a slow, mostly-steady flicker.
+  - "out now" beside the album title is a small lit neon sign.
+  - The California outline gets a bigger, "struggling-to-ignite" flicker and throws a few sparks
+    off its southeast corner on the flares.
+  - A whisper of drifting film grain over the whole page (35mm noir texture, kept very faint).
+  - The section-heading accent rules read as small lit neon bars with a slow, rare flicker.
+
+### Changed
+- Made the hero smoke a touch subtler (less smoke).
+
 ## [1.0.8] - 2026-07-05
 
 ### Changed
