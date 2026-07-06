@@ -151,6 +151,32 @@
 </head>
 <body>
 
+<!-- Lore silhouettes, defined once and referenced as faint side-hints in
+     the section gutters below (see .lore-hint). -->
+<svg class="lore-symbols" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <mask id="loreMoonMask"><rect x="0" y="0" width="100" height="100" fill="#fff"/><circle cx="64" cy="46" r="37" fill="#000"/></mask>
+  </defs>
+  <symbol id="lore-owl" viewBox="16 0 68 100">
+    <path fill="currentColor" fill-rule="evenodd" d="M34 18 L38 4 L45 18 Q50 15 55 18 L62 4 L66 18 Q82 26 79 48 Q77 74 62 88 Q50 96 38 88 Q23 74 21 48 Q18 26 34 18 Z M32.5 42 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0 Z M52.5 42 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0 Z"/>
+  </symbol>
+  <symbol id="lore-moon" viewBox="10 8 82 84"><circle cx="50" cy="50" r="40" fill="currentColor" mask="url(#loreMoonMask)"/></symbol>
+  <symbol id="lore-dog" viewBox="36 0 62 104">
+    <path fill="currentColor" d="M40 100 L40 60 Q38 46 46 40 Q42 28 50 20 Q54 10 60 14 L58 2 L68 12 Q76 10 76 22 Q76 30 70 34 L82 34 Q76 44 66 46 Q74 60 72 78 Q88 66 96 74 Q92 92 74 92 L74 100 L64 100 L64 74 Q52 70 52 100 Z"/>
+  </symbol>
+  <symbol id="lore-chicken" viewBox="12 12 84 104">
+    <path fill="currentColor" d="M40 26 L42 16 L47 24 L51 14 L55 24 Q64 26 62 38 L72 40 L60 46 L62 54 Q84 52 92 84 Q78 74 66 74 Q70 96 40 96 Q14 96 18 68 Q20 48 40 46 Q34 36 40 26 Z"/>
+    <path stroke="currentColor" stroke-width="3" fill="none" d="M40 96 L38 112 M56 96 L58 112"/>
+  </symbol>
+  <symbol id="lore-branch" viewBox="0 0 180 78">
+    <path stroke="currentColor" stroke-width="4.5" fill="none" stroke-linecap="round" d="M0 20 Q40 30 70 18 Q100 8 130 22 Q150 30 175 20"/>
+    <path stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" d="M70 18 Q78 40 96 50 M96 50 q-14 2 -20 -6 M96 50 q6 -14 20 -14"/>
+    <circle cx="70" cy="18" r="3.2" fill="currentColor"/>
+    <g fill="currentColor"><path d="M40 30 q-10 -12 -20 -4 q10 8 20 4 z"/><path d="M130 22 q6 -14 20 -12 q-6 14 -20 12 z"/><path d="M96 50 q-2 14 8 20 q6 -12 -8 -20 z"/></g>
+  </symbol>
+  <symbol id="lore-leaf" viewBox="0 0 36 26"><path fill="currentColor" d="M0 20 q14 -20 34 -14 q-10 22 -34 14 z"/></symbol>
+</svg>
+
 <main>
 
   <!-- ================= HERO ================= -->
@@ -161,49 +187,6 @@
            width="2000" height="2000"
            fetchpriority="high">
       <div class="portrait-smoke" aria-hidden="true"></div>
-      <!-- Lore drifting through the haze: moon, owl, howling dog, chicken,
-           knotty branch + leaves. Each fades up and dissolves on its own
-           slow, staggered cycle, so one or two ghost through at a time. -->
-      <svg class="portrait-lore" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs><mask id="moonmask"><rect x="0" y="0" width="100" height="100" fill="#fff"/><circle cx="64" cy="46" r="37" fill="#000"/></mask></defs>
-        <!-- knotty branch + leaves, along the top -->
-        <g transform="translate(8,44) scale(1.55)">
-          <g class="lore lore--branch">
-            <path d="M0 20 Q40 30 70 18 Q100 8 130 22 Q150 30 175 20" stroke="#b9a6d6" stroke-width="4.5" fill="none" stroke-linecap="round"/>
-            <path d="M70 18 Q78 40 96 50 M96 50 q-14 2 -20 -6 M96 50 q6 -14 20 -14" stroke="#b9a6d6" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-            <circle cx="70" cy="18" r="3.2" fill="#b9a6d6"/>
-            <g fill="#b9a6d6"><path d="M40 30 q-10 -12 -20 -4 q10 8 20 4 z"/><path d="M130 22 q6 -14 20 -12 q-6 14 -20 12 z"/><path d="M96 50 q-2 14 8 20 q6 -12 -8 -20 z"/></g>
-          </g>
-        </g>
-        <!-- moon, upper right -->
-        <g transform="translate(225,52) scale(0.9)">
-          <g class="lore lore--moon"><circle cx="50" cy="50" r="40" fill="#b9a6d6" mask="url(#moonmask)"/></g>
-        </g>
-        <!-- owl, mid left -->
-        <g transform="translate(34,150)">
-          <g class="lore lore--owl">
-            <path d="M34 18 L38 4 L45 18 Q50 15 55 18 L62 4 L66 18 Q82 26 79 48 Q77 74 62 88 Q50 96 38 88 Q23 74 21 48 Q18 26 34 18 Z" fill="#b9a6d6"/>
-            <circle cx="40" cy="42" r="7.5" fill="#100c17"/><circle cx="60" cy="42" r="7.5" fill="#100c17"/>
-            <path d="M50 50 l5 7 l-10 0 z" fill="#100c17"/>
-          </g>
-        </g>
-        <!-- howling dog, lower right, looking to the moon -->
-        <g transform="translate(196,262) scale(1.05)">
-          <g class="lore lore--dog">
-            <path d="M40 100 L40 60 Q38 46 46 40 Q42 28 50 20 Q54 10 60 14 L58 2 L68 12 Q76 10 76 22 Q76 30 70 34 L82 34 Q76 44 66 46 Q74 60 72 78 Q88 66 96 74 Q92 92 74 92 L74 100 L64 100 L64 74 Q52 70 52 100 Z" fill="#b9a6d6"/>
-          </g>
-        </g>
-        <!-- chicken, lower left -->
-        <g transform="translate(46,300) scale(0.92)">
-          <g class="lore lore--chicken">
-            <path d="M40 26 L42 16 L47 24 L51 14 L55 24 Q64 26 62 38 L72 40 L60 46 L62 54 Q84 52 92 84 Q78 74 66 74 Q70 96 40 96 Q14 96 18 68 Q20 48 40 46 Q34 36 40 26 Z" fill="#b9a6d6"/>
-            <path d="M40 96 L38 112 M56 96 L58 112" stroke="#b9a6d6" stroke-width="3" fill="none"/>
-          </g>
-        </g>
-        <!-- a couple of loose drifting leaves -->
-        <g transform="translate(232,182)"><g class="lore lore--leaf1"><path d="M0 20 q14 -20 34 -14 q-10 22 -34 14 z" fill="#b9a6d6"/></g></g>
-        <g transform="translate(120,352)"><g class="lore lore--leaf2"><path d="M0 14 q20 -10 34 8 q-22 12 -34 -8 z" fill="#b9a6d6"/></g></g>
-      </svg>
     </figure>
     <header class="hero-text">
       <h1 id="name">Chris<br>Portka</h1>
@@ -214,12 +197,12 @@
               <polygon points="4.2,0.3 27.1,0.2 47.1,0.0 78.5,0.5 102.7,0.5 102.9,51.4 102.7,88.6 132.9,115.0 161.3,140.9 183.7,162.0 199.9,177.6 228.3,206.1 228.3,209.8 232.2,214.7 235.4,222.4 240.0,226.6 237.2,230.5 233.5,232.4 230.6,237.5 231.5,244.5 230.9,248.8 226.2,253.0 227.7,264.0 230.9,264.1 232.2,269.6 230.9,272.2 226.3,273.3 195.3,276.0 170.0,278.6 167.2,274.8 165.3,261.4 162.0,256.2 154.6,249.1 145.3,242.5 139.9,243.2 136.3,234.3 121.1,231.3 106.1,223.6 91.9,222.4 87.8,218.5 88.2,210.3 82.2,199.0 72.8,186.6 58.3,167.5 57.3,152.4 54.2,148.8 47.7,141.9 46.0,136.7 43.9,124.4 39.6,118.0 33.1,108.6 32.6,103.1 26.0,97.0 16.2,91.2 15.5,80.5 13.5,71.6 12.0,64.9 8.2,58.6 0.0,51.8 7.7,29.7 4.2,25.5 5.7,8.1"/>
             </clipPath>
             <linearGradient id="curtainFolds" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#4a0b12"/><stop offset="0.09" stop-color="#9c1622"/>
-              <stop offset="0.18" stop-color="#450a11"/><stop offset="0.27" stop-color="#96131f"/>
-              <stop offset="0.36" stop-color="#420910"/><stop offset="0.45" stop-color="#a3161f"/>
-              <stop offset="0.55" stop-color="#3f080f"/><stop offset="0.64" stop-color="#9c1622"/>
-              <stop offset="0.73" stop-color="#450a11"/><stop offset="0.82" stop-color="#96131f"/>
-              <stop offset="0.91" stop-color="#420910"/><stop offset="1" stop-color="#8a1019"/>
+              <stop offset="0" stop-color="#0c0814"/><stop offset="0.09" stop-color="#4a3d6b"/>
+              <stop offset="0.18" stop-color="#0a0712"/><stop offset="0.27" stop-color="#574876"/>
+              <stop offset="0.36" stop-color="#0a0712"/><stop offset="0.45" stop-color="#6f5a8a"/>
+              <stop offset="0.55" stop-color="#080610"/><stop offset="0.64" stop-color="#4a3d6b"/>
+              <stop offset="0.73" stop-color="#0a0712"/><stop offset="0.82" stop-color="#574876"/>
+              <stop offset="0.91" stop-color="#0a0712"/><stop offset="1" stop-color="#413368"/>
             </linearGradient>
           </defs>
           <g transform="translate(10, 0) scale(0.74)">
@@ -227,15 +210,19 @@
                  crimson curtain, briefly revealed inside the state on hover -->
             <g class="redroom" clip-path="url(#caliClip)" aria-hidden="true">
               <g class="redroom-bars">
-                <rect x="0"     y="0" width="34.3" height="280" fill="#f2f2f2"/>
-                <rect x="34.3"  y="0" width="34.3" height="280" fill="#cfcfcf"/>
-                <rect x="68.6"  y="0" width="34.3" height="280" fill="#a6a6a6"/>
-                <rect x="102.9" y="0" width="34.3" height="280" fill="#7d7d7d"/>
-                <rect x="137.1" y="0" width="34.3" height="280" fill="#565656"/>
-                <rect x="171.4" y="0" width="34.3" height="280" fill="#2e2e2e"/>
-                <rect x="205.7" y="0" width="40"   height="280" fill="#0c0c0c"/>
+                <rect x="0"     y="0" width="34.3" height="280" fill="#f4f4f4"/>
+                <rect x="34.3"  y="0" width="34.3" height="280" fill="#c9c9c9"/>
+                <rect x="68.6"  y="0" width="34.3" height="280" fill="#9e9e9e"/>
+                <rect x="102.9" y="0" width="34.3" height="280" fill="#737373"/>
+                <rect x="137.1" y="0" width="34.3" height="280" fill="#4c4c4c"/>
+                <rect x="171.4" y="0" width="34.3" height="280" fill="#282828"/>
+                <rect x="205.7" y="0" width="40"   height="280" fill="#080808"/>
+                <!-- horizontal broadcast strips (a bit more test-card detail) -->
+                <rect x="-20" y="150" width="290" height="26" fill="#0a0a0a"/>
+                <rect x="-20" y="176" width="290" height="14" fill="#b3b3b3"/>
+                <rect x="-20" y="236" width="290" height="10" fill="#e8e8e8"/>
               </g>
-              <rect class="redroom-curtain" x="-20" y="0" width="290" height="280" fill="url(#curtainFolds)" opacity="0.5"/>
+              <rect class="redroom-curtain" x="-20" y="0" width="290" height="280" fill="url(#curtainFolds)" opacity="0.4"/>
             </g>
             <polygon
               class="cali-outline"
@@ -273,7 +260,7 @@
 
   <!-- ================= CURRENT RELEASE ================= -->
   <section id="release" class="release" aria-labelledby="release-heading">
-    <h2 id="release-heading" class="section-heading">The Album Everyone Wants &nbsp;&middot;&nbsp; <span class="neon-outnow">out now<span class="sign-spark sign-spark--1" aria-hidden="true"></span><span class="sign-spark sign-spark--2" aria-hidden="true"></span><span class="sign-spark sign-spark--3" aria-hidden="true"></span></span></h2>
+    <h2 id="release-heading" class="section-heading">The Album Everyone Wants &nbsp;&middot;&nbsp; <span class="neon-outnow">out now<span class="sign-spark sign-spark--1" aria-hidden="true"></span><span class="sign-spark sign-spark--2" aria-hidden="true"></span><span class="sign-spark sign-spark--3" aria-hidden="true"></span><span class="sign-spark sign-spark--4" aria-hidden="true"></span><span class="sign-spark sign-spark--5" aria-hidden="true"></span></span></h2>
 
     <div class="release-grid">
       <figure class="album-cover">
@@ -316,6 +303,8 @@
 
   <!-- ================= PRESS (curated quotes, link to /press) ================= -->
   <section id="press" class="home-press" aria-labelledby="press-heading">
+    <svg class="lore-hint lore-hint--branch" aria-hidden="true"><use href="#lore-branch"/></svg>
+    <svg class="lore-hint lore-hint--owl" aria-hidden="true"><use href="#lore-owl"/></svg>
     <h2 id="press-heading" class="section-heading">Press</h2>
 
     <ol class="press-quotes">
@@ -344,6 +333,8 @@
 
   <!-- ================= DISCOGRAPHY (recent — full archive on /earlier-work) ================= -->
   <section id="discography" class="discography" aria-labelledby="disco-heading">
+    <svg class="lore-hint lore-hint--moon" aria-hidden="true"><use href="#lore-moon"/></svg>
+    <svg class="lore-hint lore-hint--dog" aria-hidden="true"><use href="#lore-dog"/></svg>
     <h2 id="disco-heading" class="section-heading">Recent releases</h2>
 
     <ol class="releases">
@@ -394,6 +385,8 @@
 
   <!-- ================= MAILING LIST (Stay in tune — promoted) ================= -->
   <section id="stay" class="outro outro--prominent" aria-labelledby="stay-heading">
+    <svg class="lore-hint lore-hint--chicken" aria-hidden="true"><use href="#lore-chicken"/></svg>
+    <svg class="lore-hint lore-hint--leaf" aria-hidden="true"><use href="#lore-leaf"/></svg>
     <h2 id="stay-heading" class="section-heading section-heading--lg">Stay in tune</h2>
 
     <!--

@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.2.1] - 2026-07-06
+
+### Changed
+- Tuned the Lynch/lore touches:
+  - **Red Room wink** recolored from crimson to purple/black (on-palette), with more of the B&W
+    test pattern showing (added horizontal broadcast strips) and a broken-broadcast flicker.
+  - **Roadhouse hum** made stronger and more present — a breathing edge vignette with a couple of
+    electrical buzz-flickers, instead of the near-invisible flat dim.
+  - **Lore silhouettes** moved out of the hero and sprinkled into the section gutters (press,
+    discography, outro) as faint ~20% off-to-the-side hints; hidden on narrow screens.
+  - **"out now" sparks** made bigger and more numerous (a fuller burst).
+  - **Hero smoke** dialed down further (opacity 0.30/0.22 → 0.20/0.14).
+
 ## [1.2.0] - 2026-07-06
 
 ### Added
