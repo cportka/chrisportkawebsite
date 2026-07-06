@@ -4,6 +4,21 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.2.0] - 2026-07-06
+
+### Added
+- Lynch / lore touches on the homepage, all lavender-only (save the one crimson wink) and
+  reduced-motion safe:
+  - **Red Room wink** — hovering/tapping California briefly reveals a B&W broadcast test pattern
+    behind a wind-blown crimson curtain, clipped to the state, then it snaps back to lavender. The
+    one deliberate break of the one-accent rule, only on interaction.
+  - **The Roadhouse hum** — an almost-imperceptible slow dim/brighten breath over the whole page.
+  - **Lore in the haze** — faint silhouettes drift up through the hero smoke and dissolve on slow,
+    staggered cycles: a knotty branch + leaves, the crescent moon, an owl, a dog howling at the
+    moon, a chicken, and stray leaves.
+  - **Sign sparks** — the "out now" neon occasionally bursts a few sparks off its corner in time
+    with its buzz.
+
 ## [1.1.0] - 2026-07-06
 
 ### Added

@@ -67,6 +67,26 @@ body::after {
   66%  { background-position: 22px -32px; }
   100% { background-position: 0 0; }
 }
+/* The Roadhouse hum — an almost-imperceptible slow dim/brighten breath
+   over the whole page, like flickering bar lights. A faint black veil
+   that breathes its opacity; kept tiny on purpose, motion-gated below. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: #05030a;
+  opacity: 0;
+  animation: roadhouse-hum 11s ease-in-out infinite;
+}
+@keyframes roadhouse-hum {
+  0%, 100% { opacity: 0; }
+  38% { opacity: 0.05; }
+  44% { opacity: 0.015; }   /* a small catch, like a struggling ballast */
+  50% { opacity: 0.06; }
+  70% { opacity: 0.01; }
+}
 img { max-width: 100%; height: auto; display: block; }
 a {
   color: var(--accent);
@@ -225,6 +245,44 @@ section {
   from { background-position: 0 0; }
   to   { background-position: 90px -520px; }
 }
+/* Lore layer — faint silhouettes drifting up through the hero haze. Sits
+   above the smoke, below the edge vignette; each shape fades in and
+   dissolves on its own slow, staggered cycle so only one or two ghost
+   through at once. */
+.portrait-lore {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(130% 110% at 50% 40%, #000 42%, transparent 92%);
+          mask-image: radial-gradient(130% 110% at 50% 40%, #000 42%, transparent 92%);
+}
+.lore { opacity: 0; will-change: opacity, transform; }
+.lore--branch  { animation: lore-drift 46s ease-in-out infinite; animation-delay: -4s; }
+.lore--moon    { animation: lore-drift 40s ease-in-out infinite; animation-delay: -20s; }
+.lore--owl     { animation: lore-drift 34s ease-in-out infinite; animation-delay: -30s; }
+.lore--dog     { animation: lore-drift 38s ease-in-out infinite; animation-delay: -9s; }
+.lore--chicken { animation: lore-drift 31s ease-in-out infinite; animation-delay: -24s; }
+.lore--leaf1,
+.lore--leaf2 { transform-box: fill-box; transform-origin: center; }
+.lore--leaf1   { animation: lore-leaf 26s linear infinite; animation-delay: -14s; }
+.lore--leaf2   { animation: lore-leaf 29s linear infinite; animation-delay: -3s; }
+@keyframes lore-drift {
+  0% { opacity: 0; transform: translateY(16px); }
+  7% { opacity: 0.19; }
+  17% { opacity: 0.19; }
+  26% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+@keyframes lore-leaf {
+  0% { opacity: 0; transform: translate(0, 10px) rotate(0deg); }
+  12% { opacity: 0.15; }
+  42% { opacity: 0.12; }
+  56% { opacity: 0; transform: translate(-24px, -40px) rotate(-38deg); }
+  100% { opacity: 0; transform: translate(-24px, -40px) rotate(-38deg); }
+}
 .hero-text {
   padding: clamp(2rem, 6vw, 4rem) var(--gutter) clamp(3rem, 8vw, 5rem);
   text-align: center;
@@ -280,6 +338,7 @@ h1#name {
 /* "out now" as a small lavender neon sign beside the album title. Lit
    accent glow with a couple of quick buzzes per cycle. */
 .neon-outnow {
+  position: relative;
   color: var(--accent-bright);
   text-shadow:
     0 0 4px rgba(212, 189, 240, 0.75),
@@ -294,6 +353,41 @@ h1#name {
   77% { opacity: 0.35; }  /* buzz two, a touch harder */
   79% { opacity: 0.9; }
   80% { opacity: 0.55; }
+}
+/* Sparks that occasionally burst off the top-right of the "out now" sign,
+   in sync with its second, harder buzz (~77% of the 6.5s cycle). */
+.sign-spark {
+  position: absolute;
+  top: 0.05em;
+  right: -0.05em;
+  width: 0.14em;
+  height: 0.14em;
+  border-radius: 50%;
+  background: #f6eeff;
+  box-shadow: 0 0 3px rgba(244, 236, 255, 0.95), 0 0 6px rgba(181, 157, 209, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  animation: sign-spark-1 6.5s ease-out infinite;
+}
+.sign-spark--2 { animation-name: sign-spark-2; }
+.sign-spark--3 { animation-name: sign-spark-3; }
+@keyframes sign-spark-1 {
+  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.5); }
+  77.5% { opacity: 1; transform: translate(0,0) scale(1); }
+  84% { opacity: 0; transform: translate(0.7em,-0.75em) scale(0.2); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.5); }
+}
+@keyframes sign-spark-2 {
+  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  78% { opacity: 0.95; transform: translate(0,0) scale(0.85); }
+  85% { opacity: 0; transform: translate(1em,-0.4em) scale(0.2); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes sign-spark-3 {
+  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  78.5% { opacity: 0.85; transform: translate(0,0) scale(0.75); }
+  86% { opacity: 0; transform: translate(0.4em,-0.95em) scale(0.2); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
 /* California outline + "Musician, Songwriter, Guy" tagline overlay.
    The name is forced onto two lines ("Chris" / "Portka"). The state's
@@ -401,6 +495,31 @@ h1#name {
   89% { opacity: 0; transform: translate(9px,8px) scale(0.2); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
+/* Red Room wink — the state's interior is a hidden B&W test pattern
+   behind a slowly wind-blown crimson curtain, glimpsed only when the
+   California is hovered/tapped, then it snaps back to lavender. This is
+   the one place we deliberately break the one-accent rule. */
+.redroom { opacity: 0; }
+.redroom-curtain {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: curtain-wind 4.5s ease-in-out infinite;
+}
+@keyframes curtain-wind {
+  0%, 100% { transform: skewX(0deg) translateX(0); }
+  50% { transform: skewX(2.4deg) translateX(3px); }
+}
+.hero-cali:hover .redroom,
+.hero-cali:focus-within .redroom {
+  animation: redroom-wink 1.5s ease both;
+}
+@keyframes redroom-wink {
+  0% { opacity: 0; }
+  16% { opacity: 0.9; }
+  68% { opacity: 0.82; }
+  100% { opacity: 0; }
+}
+
 /* Respect reduced-motion: hold the smoke and neon glow still, keeping a
    faint resting halo on the outline rather than a hard cut. */
 @media (prefers-reduced-motion: reduce) {
@@ -415,8 +534,15 @@ h1#name {
   h1#name,
   .neon-outnow,
   .section-heading::after { animation: none; }
-  .cali-spark { animation: none; opacity: 0; }
-  body::after { animation: none; }
+  .cali-spark,
+  .sign-spark,
+  .lore { animation: none; opacity: 0; }
+  body::after,
+  .redroom-curtain { animation: none; }
+  body::before { animation: none; opacity: 0; }
+  .redroom,
+  .hero-cali:hover .redroom,
+  .hero-cali:focus-within .redroom { animation: none; opacity: 0; }
 }
 
 .hero-quote {
