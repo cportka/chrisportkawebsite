@@ -666,16 +666,18 @@ h1#name {
    Great Vibes is a delicate calligraphic script, so the bands are thin
    (2.5/4.6, vs 4.2/7.5 for a heavy face) — any thicker and the loops
    and counters fill in. */
+.cali-tagline { opacity: 0.7; }
 .cali-tagline text {
   font-family: "Great Vibes", "Brush Script MT", cursive;
   font-weight: 400;
-  font-size: 27px;
+  font-size: 23px;
   letter-spacing: 0;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-.cali-tagline .ct-outer { fill: none; stroke: #0a070f; stroke-width: 4.6; }
-.cali-tagline .ct-band  { fill: none; stroke: #f2ecf7; stroke-width: 2.5; }
+/* bands scale with the type: at 23px these keep the loops open */
+.cali-tagline .ct-outer { fill: none; stroke: #0a070f; stroke-width: 4; }
+.cali-tagline .ct-band  { fill: none; stroke: #f2ecf7; stroke-width: 2.15; }
 .cali-tagline .ct-core  { fill: #0a070f; }
 
 /* Red Room wink — the state's interior is a hidden B&W test pattern

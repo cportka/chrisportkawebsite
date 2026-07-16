@@ -4,6 +4,12 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.4.3] - 2026-07-16
+
+### Changed
+- Sticker tagline settled: 23px at 70% opacity (bands scaled to 2.15/4 to keep the loops open),
+  so it reads as a quiet signature under the neon rather than a headline.
+
 ## [1.4.2] - 2026-07-16
 
 ### Changed
