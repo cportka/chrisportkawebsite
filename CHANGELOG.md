@@ -4,6 +4,24 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.5.0] - 2026-07-16
+
+### Added
+- The neon theme now runs through every subpage:
+  - Every subpage's main header (`.album-title`) carries the homepage's neon glow and buzz.
+  - Back-links, the press-inquiries email, and the release-page kickers are small lit neon signs
+    (`.neon-link`), and the press dividers glow as quiet lit tubes.
+  - The 404's "Not found" is the most broken sign on the site — violent fritz, its own sparks,
+    and a lightning bolt.
+- Angular lightning bolts crack off the signs when they short: the "out now" buzz, the dying
+  "Earlier work" sputter, and the California flares all throw a jagged bolt now.
+- The hidden Proto Play doorway on /earlier-work is styled as a blacklight: deep purple text
+  barely off the dark, UV-violet halo, warming under the lamp on hover.
+
+### Changed
+- Spark intensity up across the board: brighter white-hot cores, bigger halos, thicker California
+  shards.
+
 ## [1.4.4] - 2026-07-16
 
 ### Fixed
