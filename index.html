@@ -36,7 +36,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/assets/style.css">
 
@@ -235,20 +235,20 @@
             />
             <!-- sparks that spray off the SE corner (open space) when the tube shorts -->
             <g class="cali-sparks" aria-hidden="true">
-              <circle class="cali-spark cali-spark--1" cx="236" cy="224" r="5"/>
-              <circle class="cali-spark cali-spark--2" cx="236" cy="224" r="3.6"/>
-              <circle class="cali-spark cali-spark--3" cx="236" cy="224" r="2.8"/>
+              <path class="cali-spark cali-spark--1" d="M236 224 l6 -4 l-2 1 l7 -4"/>
+              <path class="cali-spark cali-spark--2" d="M236 224 l8 -1 l-3 1 l9 0"/>
+              <path class="cali-spark cali-spark--3" d="M236 224 l5 4 l-2 -1 l7 5"/>
+              <path class="cali-spark cali-spark--4" d="M236 224 l3 -7 l-1 3 l3 -7"/>
+              <path class="cali-spark cali-spark--5" d="M236 224 l7 2 l-2 -2 l8 4"/>
             </g>
           </g>
-          <text x="135" y="148" text-anchor="middle"
-            style="font-family: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
-                   font-size: 26px;
-                   font-weight: 400;
-                   font-style: italic;
-                   fill: #d8c9ec;
-                   letter-spacing: 1.2px;">
-            Musician, Songwriter, Guy
-          </text>
+          <!-- sticker-style tagline: black core / white band / black rim,
+               three stacked copies since SVG text takes one stroke each -->
+          <g class="cali-tagline" aria-hidden="true">
+            <text class="ct-outer" x="135" y="148" text-anchor="middle">Musician, Songwriter, Guy</text>
+            <text class="ct-band"  x="135" y="148" text-anchor="middle">Musician, Songwriter, Guy</text>
+            <text class="ct-core"  x="135" y="148" text-anchor="middle">Musician, Songwriter, Guy</text>
+          </g>
         </svg>
       </div>
       <blockquote class="hero-quote">
@@ -260,7 +260,7 @@
 
   <!-- ================= CURRENT RELEASE ================= -->
   <section id="release" class="release" aria-labelledby="release-heading">
-    <h2 id="release-heading" class="section-heading">The Album Everyone Wants &nbsp;&middot;&nbsp; <span class="neon-outnow">out now<span class="sign-spark sign-spark--1" aria-hidden="true"></span><span class="sign-spark sign-spark--2" aria-hidden="true"></span><span class="sign-spark sign-spark--3" aria-hidden="true"></span><span class="sign-spark sign-spark--4" aria-hidden="true"></span><span class="sign-spark sign-spark--5" aria-hidden="true"></span></span></h2>
+    <h2 id="release-heading" class="section-heading">The Album Everyone Wants &nbsp;&middot;&nbsp; <span class="neon-outnow">out now<span class="sign-spark sign-spark--1" aria-hidden="true"></span><span class="sign-spark sign-spark--2" aria-hidden="true"></span><span class="sign-spark sign-spark--3" aria-hidden="true"></span><span class="sign-spark sign-spark--4" aria-hidden="true"></span><span class="sign-spark sign-spark--5" aria-hidden="true"></span><span class="sign-spark sign-spark--6" aria-hidden="true"></span><span class="sign-spark sign-spark--7" aria-hidden="true"></span></span></h2>
 
     <div class="release-grid">
       <figure class="album-cover">
@@ -412,7 +412,7 @@
     </ol>
 
     <p class="full-disco">
-      <a href="/earlier-work" class="arrow-link">Earlier work &rarr;</a>
+      <a href="/earlier-work" class="arrow-link neon-dying">Earlier work &rarr;<span class="sign-spark sign-spark--d1" aria-hidden="true"></span><span class="sign-spark sign-spark--d2" aria-hidden="true"></span></a>
     </p>
   </section>
 

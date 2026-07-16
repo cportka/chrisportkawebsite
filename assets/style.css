@@ -443,52 +443,88 @@ h1#name {
 }
 /* Sparks that occasionally burst off the top-right of the "out now" sign,
    in sync with its second, harder buzz (~77% of the 6.5s cycle). */
+/* Sign sparks — thin bright needles that shoot off a sign when it buzzes,
+   like real electrical sparks. Each spark bakes its angle into every
+   keyframe (rotate first, then translateX flies it along its own axis;
+   scaleX stretches the streak at launch and burns it out to a point).
+   Sparks 1-5 fly on "out now"'s hard second buzz; 6-7 on the first. */
 .sign-spark {
   position: absolute;
-  top: 0.02em;
-  right: -0.04em;
-  width: 0.24em;
-  height: 0.24em;
-  border-radius: 50%;
-  background: #f8f1ff;
-  box-shadow: 0 0 5px rgba(244, 236, 255, 1), 0 0 11px rgba(181, 157, 209, 0.85);
+  top: 0.08em;
+  right: -0.02em;
+  width: 0.5em;
+  height: 0.075em;
+  border-radius: 0.04em;
+  background: linear-gradient(90deg, rgba(248, 241, 255, 0) 0%, #f8f1ff 45%, #ffffff 100%);
+  box-shadow: 0 0 4px rgba(244, 236, 255, 0.9), 0 0 9px rgba(181, 157, 209, 0.6);
   opacity: 0;
+  transform-origin: left center;
   pointer-events: none;
-  animation: sign-spark-1 6.5s ease-out infinite;
+  animation: sign-spark-1 6.5s linear infinite;
 }
 .sign-spark--2 { animation-name: sign-spark-2; }
-.sign-spark--3 { animation-name: sign-spark-3; }
-.sign-spark--4 { animation-name: sign-spark-4; width: 0.18em; height: 0.18em; }
-.sign-spark--5 { animation-name: sign-spark-5; width: 0.16em; height: 0.16em; }
+.sign-spark--3 { animation-name: sign-spark-3; width: 0.42em; }
+.sign-spark--4 { animation-name: sign-spark-4; width: 0.38em; }
+.sign-spark--5 { animation-name: sign-spark-5; }
+.sign-spark--6 { animation-name: sign-spark-6; width: 0.4em; }
+.sign-spark--7 { animation-name: sign-spark-7; width: 0.34em; }
 @keyframes sign-spark-1 {
-  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.5); }
-  77.5% { opacity: 1; transform: translate(0,0) scale(1.1); }
-  86% { opacity: 0; transform: translate(1.1em,-1.15em) scale(0.2); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.5); }
+  0%, 76% { opacity: 0; transform: rotate(-50deg) translateX(0) scaleX(0.3); }
+  77.5% { opacity: 1; transform: rotate(-50deg) translateX(0.15em) scaleX(1.15); }
+  86% { opacity: 0; transform: rotate(-50deg) translateX(1.7em) scaleX(0.3); }
+  100% { opacity: 0; transform: rotate(-50deg) translateX(0) scaleX(0.3); }
 }
 @keyframes sign-spark-2 {
-  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  78% { opacity: 1; transform: translate(0,0) scale(1); }
-  87% { opacity: 0; transform: translate(1.5em,-0.55em) scale(0.2); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  0%, 76.5% { opacity: 0; transform: rotate(-15deg) translateX(0) scaleX(0.3); }
+  78% { opacity: 1; transform: rotate(-15deg) translateX(0.2em) scaleX(1); }
+  87% { opacity: 0; transform: rotate(-15deg) translateX(2em) scaleX(0.3); }
+  100% { opacity: 0; transform: rotate(-15deg) translateX(0) scaleX(0.3); }
 }
 @keyframes sign-spark-3 {
-  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  78.5% { opacity: 0.95; transform: translate(0,0) scale(0.9); }
-  88% { opacity: 0; transform: translate(0.55em,-1.5em) scale(0.2); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  0%, 77% { opacity: 0; transform: rotate(-78deg) translateX(0) scaleX(0.3); }
+  78.5% { opacity: 0.95; transform: rotate(-78deg) translateX(0.15em) scaleX(1); }
+  88% { opacity: 0; transform: rotate(-78deg) translateX(1.8em) scaleX(0.3); }
+  100% { opacity: 0; transform: rotate(-78deg) translateX(0) scaleX(0.3); }
 }
 @keyframes sign-spark-4 {
-  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  79% { opacity: 0.9; transform: translate(0,0) scale(0.85); }
-  89% { opacity: 0; transform: translate(1.7em,-1.05em) scale(0.15); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  0%, 77.5% { opacity: 0; transform: rotate(14deg) translateX(0) scaleX(0.3); }
+  79% { opacity: 0.9; transform: rotate(14deg) translateX(0.15em) scaleX(0.95); }
+  89% { opacity: 0; transform: rotate(14deg) translateX(1.5em) scaleX(0.25); }
+  100% { opacity: 0; transform: rotate(14deg) translateX(0) scaleX(0.3); }
 }
 @keyframes sign-spark-5 {
-  0%, 76% { opacity: 0; transform: translate(0,0) scale(0.3); }
-  80% { opacity: 0.85; transform: translate(0,0) scale(0.8); }
-  90% { opacity: 0; transform: translate(0.2em,-1.7em) scale(0.15); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.3); }
+  0%, 78% { opacity: 0; transform: rotate(-33deg) translateX(0) scaleX(0.3); }
+  80% { opacity: 0.9; transform: rotate(-33deg) translateX(0.2em) scaleX(1.05); }
+  90% { opacity: 0; transform: rotate(-33deg) translateX(2.2em) scaleX(0.25); }
+  100% { opacity: 0; transform: rotate(-33deg) translateX(0) scaleX(0.3); }
+}
+@keyframes sign-spark-6 {
+  0%, 45.5% { opacity: 0; transform: rotate(-62deg) translateX(0) scaleX(0.3); }
+  47% { opacity: 0.95; transform: rotate(-62deg) translateX(0.15em) scaleX(1); }
+  55% { opacity: 0; transform: rotate(-62deg) translateX(1.5em) scaleX(0.3); }
+  100% { opacity: 0; transform: rotate(-62deg) translateX(0) scaleX(0.3); }
+}
+@keyframes sign-spark-7 {
+  0%, 46.5% { opacity: 0; transform: rotate(-8deg) translateX(0) scaleX(0.3); }
+  48% { opacity: 0.9; transform: rotate(-8deg) translateX(0.2em) scaleX(0.95); }
+  57% { opacity: 0; transform: rotate(-8deg) translateX(1.7em) scaleX(0.25); }
+  100% { opacity: 0; transform: rotate(-8deg) translateX(0) scaleX(0.3); }
+}
+/* dying-sign sparks — fire during the Earlier-work link's big sputter
+   (~71% of its 8s cycle) */
+.sign-spark--d1 { animation-name: dying-spark-1; animation-duration: 8s; top: 0.1em; }
+.sign-spark--d2 { animation-name: dying-spark-2; animation-duration: 8s; top: 0.2em; width: 0.4em; }
+@keyframes dying-spark-1 {
+  0%, 70.5% { opacity: 0; transform: rotate(-42deg) translateX(0) scaleX(0.3); }
+  71.5% { opacity: 1; transform: rotate(-42deg) translateX(0.15em) scaleX(1); }
+  78% { opacity: 0; transform: rotate(-42deg) translateX(1.6em) scaleX(0.3); }
+  100% { opacity: 0; transform: rotate(-42deg) translateX(0) scaleX(0.3); }
+}
+@keyframes dying-spark-2 {
+  0%, 71% { opacity: 0; transform: rotate(18deg) translateX(0) scaleX(0.3); }
+  72% { opacity: 0.9; transform: rotate(18deg) translateX(0.15em) scaleX(0.9); }
+  79% { opacity: 0; transform: rotate(18deg) translateX(1.4em) scaleX(0.25); }
+  100% { opacity: 0; transform: rotate(18deg) translateX(0) scaleX(0.3); }
 }
 /* California outline + "Musician, Songwriter, Guy" tagline overlay.
    The name is forced onto two lines ("Chris" / "Portka"). The state's
@@ -559,12 +595,17 @@ h1#name {
             drop-shadow(0 0 20px rgba(181, 157, 209, 0.3));
   }
 }
-/* Sparks off the NE corner, timed to the two flares (49% and 82%). Each
-   flies a slightly different way and burns out fast. */
+/* Sparks off the SE corner, timed to the two flares (49% and 82%). Each
+   is a thin jagged shard (stroke path) that flies out along its own
+   direction and burns out fast — angular, like real electrical sparks. */
 .cali-spark {
-  fill: #f6eeff;
+  fill: none;
+  stroke: #f6eeff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   transform-box: fill-box;
-  transform-origin: center;
+  transform-origin: left center;
   opacity: 0;
   filter: drop-shadow(0 0 2px rgba(244, 236, 255, 1))
           drop-shadow(0 0 5px rgba(181, 157, 209, 0.75));
@@ -572,33 +613,69 @@ h1#name {
 }
 .cali-spark--2 { animation-name: cali-spark-2; }
 .cali-spark--3 { animation-name: cali-spark-3; }
+.cali-spark--4 { animation-name: cali-spark-4; stroke-width: 1.4; }
+.cali-spark--5 { animation-name: cali-spark-5; stroke-width: 1.4; }
 @keyframes cali-spark-1 {
-  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.5); }
-  49% { opacity: 1; transform: translate(0,0) scale(1); }
-  54% { opacity: 0; transform: translate(13px,-9px) scale(0.2); }
-  81% { opacity: 0; transform: translate(0,0) scale(0.5); }
-  82% { opacity: 0.9; transform: translate(0,0) scale(0.9); }
-  87% { opacity: 0; transform: translate(10px,-6px) scale(0.2); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.5); }
+  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  49% { opacity: 1; transform: translate(1px,-1px) scale(1); }
+  54% { opacity: 0; transform: translate(14px,-9px) scale(0.5); }
+  81% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  82% { opacity: 0.9; transform: translate(1px,-1px) scale(0.9); }
+  87% { opacity: 0; transform: translate(11px,-7px) scale(0.45); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
 @keyframes cali-spark-2 {
   0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  49% { opacity: 1; transform: translate(0,0) scale(0.9); }
-  55% { opacity: 0; transform: translate(15px,3px) scale(0.2); }
+  49% { opacity: 1; transform: translate(2px,0) scale(1); }
+  55% { opacity: 0; transform: translate(16px,-1px) scale(0.5); }
   81% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  82% { opacity: 0.85; transform: translate(0,0) scale(0.8); }
-  88% { opacity: 0; transform: translate(11px,2px) scale(0.2); }
+  82% { opacity: 0.85; transform: translate(2px,0) scale(0.85); }
+  88% { opacity: 0; transform: translate(12px,-1px) scale(0.45); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
 @keyframes cali-spark-3 {
   0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  49.5% { opacity: 1; transform: translate(0,0) scale(0.8); }
-  56% { opacity: 0; transform: translate(12px,11px) scale(0.2); }
+  49.5% { opacity: 1; transform: translate(1px,1px) scale(0.95); }
+  56% { opacity: 0; transform: translate(12px,10px) scale(0.45); }
   81% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  82.5% { opacity: 0.8; transform: translate(0,0) scale(0.7); }
-  89% { opacity: 0; transform: translate(9px,8px) scale(0.2); }
+  82.5% { opacity: 0.8; transform: translate(1px,1px) scale(0.8); }
+  89% { opacity: 0; transform: translate(10px,8px) scale(0.4); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
+@keyframes cali-spark-4 {
+  0%, 48.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  49.5% { opacity: 0.95; transform: translate(0,-2px) scale(0.95); }
+  55% { opacity: 0; transform: translate(4px,-15px) scale(0.4); }
+  81.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  82.5% { opacity: 0.85; transform: translate(0,-2px) scale(0.8); }
+  88% { opacity: 0; transform: translate(3px,-11px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes cali-spark-5 {
+  0%, 49% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  50% { opacity: 0.9; transform: translate(2px,1px) scale(0.9); }
+  56.5% { opacity: 0; transform: translate(15px,5px) scale(0.4); }
+  82% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  83% { opacity: 0.8; transform: translate(2px,1px) scale(0.75); }
+  89.5% { opacity: 0; transform: translate(12px,4px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+/* Sticker tagline — "Musician, Songwriter, Guy" as black core / white
+   band / black rim, like a die-cut sticker slapped over the neon. Three
+   stacked copies because SVG text takes one stroke each; rounded joins
+   keep the bands smooth. */
+.cali-tagline text {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 20.5px;
+  letter-spacing: 0.6px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.cali-tagline .ct-outer { fill: none; stroke: #0a070f; stroke-width: 7.5; }
+.cali-tagline .ct-band  { fill: none; stroke: #f2ecf7; stroke-width: 4.2; }
+.cali-tagline .ct-core  { fill: #0a070f; }
+
 /* Red Room wink — the state's interior is a hidden B&W test pattern
    behind a slowly wind-blown purple/black curtain, glimpsed with a
    broken-broadcast flicker only when the California is hovered/tapped,
@@ -650,6 +727,14 @@ h1#name {
   .cali-spark,
   .sign-spark,
   .lore { animation: none; opacity: 0; }
+  /* !important is load-bearing: the hover/focus trigger rules appear
+     later in the file with equal specificity, and the global
+     reduced-motion `* { animation: none !important }` fallback can't
+     reach ::after pseudo-elements. */
+  .neon-dying { animation: none !important; opacity: 0.75; }
+  .release-item a::after,
+  .release-item a:hover::after,
+  .release-item a:focus-visible::after { animation: none !important; opacity: 0; }
   body::after,
   .redroom-curtain { animation: none; }
   body::before { animation: none; opacity: 0; }
@@ -858,6 +943,41 @@ h1#name {
 .vinyl-link { margin: 0; font-size: 1rem; }
 .arrow-link { color: var(--accent); }
 
+/* Dying neon — the "Earlier work" sign is mostly struggling: a dim
+   half-lit floor, brief catches that fail, then a hard sputter where the
+   sparks fly. The GLOW does the dying; the letterforms hold >= 0.72
+   opacity in every held state (>= 4.5:1 contrast on --bg), with only
+   split-second dips to 0.55 during the sputter. Reduced-motion pins it
+   to a steady half-glow. */
+.neon-dying {
+  position: relative;
+  color: var(--accent-bright);
+  text-decoration-color: rgba(212, 189, 240, 0.3);
+  text-shadow:
+    0 0 3px rgba(212, 189, 240, 0.4),
+    0 0 8px rgba(181, 157, 209, 0.25);
+  animation: neon-dying 8s linear infinite;
+}
+@keyframes neon-dying {
+  0%, 100% { opacity: 0.75; text-shadow: 0 0 2px rgba(212, 189, 240, 0.25), 0 0 5px rgba(181, 157, 209, 0.12); }
+  8% { opacity: 0.72; }
+  /* struggle one: two quick catches that fail */
+  11% { opacity: 1; text-shadow: 0 0 3px rgba(252, 248, 255, 0.95), 0 0 9px rgba(212, 189, 240, 0.8), 0 0 20px rgba(181, 157, 209, 0.5); }
+  12.5% { opacity: 0.6; text-shadow: 0 0 1px rgba(212, 189, 240, 0.15), 0 0 4px rgba(181, 157, 209, 0.08); }
+  14% { opacity: 0.95; text-shadow: 0 0 3px rgba(252, 248, 255, 0.9), 0 0 9px rgba(212, 189, 240, 0.7), 0 0 18px rgba(181, 157, 209, 0.4); }
+  16% { opacity: 0.72; text-shadow: 0 0 2px rgba(212, 189, 240, 0.25), 0 0 5px rgba(181, 157, 209, 0.12); }
+  /* a long uneasy half-light */
+  30%, 48% { opacity: 0.82; text-shadow: 0 0 2px rgba(212, 189, 240, 0.45), 0 0 7px rgba(181, 157, 209, 0.3); }
+  52% { opacity: 0.72; }
+  /* the big sputter — almost dies; the sparks fly here */
+  68% { opacity: 0.78; }
+  70% { opacity: 0.55; text-shadow: none; }
+  71.5% { opacity: 0.95; text-shadow: 0 0 3px rgba(252, 248, 255, 0.9), 0 0 10px rgba(212, 189, 240, 0.75), 0 0 22px rgba(181, 157, 209, 0.45); }
+  73% { opacity: 0.58; text-shadow: none; }
+  75% { opacity: 0.9; text-shadow: 0 0 3px rgba(252, 248, 255, 0.8), 0 0 8px rgba(212, 189, 240, 0.6); }
+  78% { opacity: 0.75; text-shadow: 0 0 2px rgba(212, 189, 240, 0.25), 0 0 5px rgba(181, 157, 209, 0.12); }
+}
+
 /* ---------- Primary CTA button (Buy the vinyl, Subscribe) ---------- */
 .button-primary {
   display: inline-block;
@@ -1002,8 +1122,75 @@ h1#name {
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--rule);
   transition: border-color 250ms ease;
+  position: relative;
 }
 .release-item a:hover { border-bottom-color: var(--accent); }
+/* On hover the row's bottom rule sparks to life as a neon tube: a
+   stuttering ignition, then it holds lit with a fast vibrating buzz for
+   as long as the hover lasts. Drawn as an ::after line over the border
+   so the glow can bloom without touching layout. */
+.release-item a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--accent-bright);
+  opacity: 0;
+  pointer-events: none;
+}
+/* Hover trigger only on devices that truly hover — on touch, tapping a
+   link "sticks" :hover, which would leave the vibrate repainting forever
+   after a tap. Keyboard focus gets its own ungated rule below (kept
+   separate: older Safari drops a whole selector list containing
+   :focus-visible). */
+@media (hover: hover) {
+  .release-item a:hover::after {
+    animation:
+      row-ignite 0.65s ease-out forwards,
+      row-vibrate 0.22s linear 0.65s infinite;
+  }
+}
+.release-item a:focus-visible::after {
+  animation:
+    row-ignite 0.65s ease-out forwards,
+    row-vibrate 0.22s linear 0.65s infinite;
+}
+@keyframes row-ignite {
+  0% { opacity: 0; box-shadow: none; }
+  12% { opacity: 0.9; box-shadow: 0 0 5px rgba(212, 189, 240, 0.7); }
+  22% { opacity: 0.15; box-shadow: none; }
+  38% { opacity: 1; box-shadow: 0 0 6px rgba(212, 189, 240, 0.85), 0 0 14px rgba(181, 157, 209, 0.5); }
+  52% { opacity: 0.35; box-shadow: 0 0 3px rgba(212, 189, 240, 0.35); }
+  70% { opacity: 1;
+    box-shadow:
+      0 0 4px rgba(252, 248, 255, 0.9),
+      0 0 10px rgba(212, 189, 240, 0.8),
+      0 0 22px rgba(181, 157, 209, 0.5); }
+  100% { opacity: 1;
+    box-shadow:
+      0 0 3px rgba(252, 248, 255, 0.85),
+      0 0 8px rgba(212, 189, 240, 0.7),
+      0 0 18px rgba(181, 157, 209, 0.45); }
+}
+@keyframes row-vibrate {
+  0% { opacity: 1;
+    box-shadow:
+      0 0 3px rgba(252, 248, 255, 0.85),
+      0 0 8px rgba(212, 189, 240, 0.7),
+      0 0 18px rgba(181, 157, 209, 0.45); }
+  50% { opacity: 0.92;
+    box-shadow:
+      0 0 2px rgba(252, 248, 255, 0.75),
+      0 0 7px rgba(212, 189, 240, 0.6),
+      0 0 15px rgba(181, 157, 209, 0.38); }
+  100% { opacity: 1;
+    box-shadow:
+      0 0 3px rgba(252, 248, 255, 0.85),
+      0 0 8px rgba(212, 189, 240, 0.7),
+      0 0 18px rgba(181, 157, 209, 0.45); }
+}
 .release-item img {
   width: 5rem;
   height: 5rem;

@@ -4,6 +4,28 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.4.0] - 2026-07-16
+
+### Added
+- "Earlier work" is now a dying neon sign — a dim, struggling-to-stay-alive flicker with brief
+  catches that fail, a hard sputter, and sparks that fly off it. Legibility floor kept.
+- Hovering a Recent release now sparks its bottom rule to life as a neon tube — a stuttering
+  ignition, then a fast vibrating buzz for as long as the hover (or keyboard focus) lasts.
+
+### Changed
+- "Musician, Songwriter, Guy" restyled as a die-cut sticker: black core / white band / black rim
+  (three stacked SVG text strokes, heavy Inter 800).
+- Sparks everywhere are now thin, angular streaks — like real electrical sparks — instead of round
+  drops, and there are more of them: California throws five jagged shards per flare, "out now"
+  fans out seven needles across its two buzzes.
+
+### Fixed
+- (from pre-merge review) The row-hover neon respects `prefers-reduced-motion` (the guard was being
+  out-cascaded), the hover trigger is gated to hover-capable devices so a tap on iOS can't leave
+  the vibrate running forever, the `:focus-visible` trigger is split into its own rule (old Safari
+  drops comma-joined lists containing it), and the dying sign's dim floor was raised to keep the
+  link's contrast above WCAG 4.5:1 in every held state.
+
 ## [1.3.0] - 2026-07-08
 
 ### Added
