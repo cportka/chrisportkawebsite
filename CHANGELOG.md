@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.3.0] - 2026-07-08
+
+### Added
+- Quote roulette: each page load, one of the four quotes (the hero's Obscure Sound line + the three
+  Press quotes) is drawn at random for the hero; the other three hold the Press section — always
+  1 up top, 3 below. Tiny inline script, no dependencies; without JS the default arrangement stands.
+
+### Changed
+- Drastically brightened the neon words. "Chris Portka" and "out now" get a hot near-white core in
+  a much bigger lavender halo, deeper multi-step buzz clusters, and an overshoot flare as the tube
+  catches again ("out now" flares right as its sparks fly). The California outline's resting glow
+  got a modest matching bump so it doesn't read flat next to the brighter name.
+
 ## [1.2.2] - 2026-07-06
 
 ### Changed
