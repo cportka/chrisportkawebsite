@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.4.2] - 2026-07-16
+
+### Changed
+- Sticker tagline font again, per feedback that Dancing Script read too playful: now **Great
+  Vibes** at a smaller size (27px) — an elegant calligraphic script that keeps it pretty but noir.
+  The outline bands were thinned to match the delicate strokes (2.5/4.6 vs 4.2/7.5) so the loops
+  and counters stay crisp instead of filling in.
+
 ## [1.4.1] - 2026-07-16
 
 ### Changed
