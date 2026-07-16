@@ -660,21 +660,22 @@ h1#name {
   89.5% { opacity: 0; transform: translate(12px,4px) scale(0.4); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
-/* Sticker tagline — "Musician, Songwriter, Guy" in a flowing cursive as
-   black core / white band / black rim, like a die-cut sticker slapped
-   over the neon. Three stacked copies because SVG text takes one stroke
-   each; rounded joins keep the bands smooth. Dancing Script 700 is the
-   heaviest of the pretty cursives, so the counters survive the band. */
+/* Sticker tagline — "Musician, Songwriter, Guy" in Great Vibes as black
+   core / white band / black rim, like a die-cut sticker slapped over the
+   neon. Three stacked copies because SVG text takes one stroke each.
+   Great Vibes is a delicate calligraphic script, so the bands are thin
+   (2.5/4.6, vs 4.2/7.5 for a heavy face) — any thicker and the loops
+   and counters fill in. */
 .cali-tagline text {
-  font-family: "Dancing Script", "Brush Script MT", cursive;
-  font-weight: 700;
-  font-size: 31px;
+  font-family: "Great Vibes", "Brush Script MT", cursive;
+  font-weight: 400;
+  font-size: 27px;
   letter-spacing: 0;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
-.cali-tagline .ct-outer { fill: none; stroke: #0a070f; stroke-width: 7.5; }
-.cali-tagline .ct-band  { fill: none; stroke: #f2ecf7; stroke-width: 4.2; }
+.cali-tagline .ct-outer { fill: none; stroke: #0a070f; stroke-width: 4.6; }
+.cali-tagline .ct-band  { fill: none; stroke: #f2ecf7; stroke-width: 2.5; }
 .cali-tagline .ct-core  { fill: #0a070f; }
 
 /* Red Room wink — the state's interior is a hidden B&W test pattern
