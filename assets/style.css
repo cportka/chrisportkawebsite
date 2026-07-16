@@ -344,33 +344,48 @@ h1#name {
   margin: 0 0 1.25rem;
   letter-spacing: -0.005em;
   color: var(--ink);
-  /* Neon-sign glow: a near-white tube with a lavender halo. The core
-     stays legible; the halo does the neon work. A slow, mostly-steady
-     flicker keeps it alive without buzzing. */
+  /* Neon-sign glow: a hot near-white tube in a big lavender halo. Two
+     buzz clusters per cycle — rapid multi-step stutters with the glow
+     collapsing, then an overshoot flare as the tube catches again. */
   text-shadow:
-    0 0 5px rgba(212, 189, 240, 0.45),
-    0 0 16px rgba(181, 157, 209, 0.30),
-    0 0 34px rgba(181, 157, 209, 0.18);
-  animation: name-neon 11s ease-in-out infinite;
+    0 0 2px rgba(248, 242, 255, 0.9),
+    0 0 9px rgba(212, 189, 240, 0.75),
+    0 0 24px rgba(181, 157, 209, 0.55),
+    0 0 48px rgba(181, 157, 209, 0.32),
+    0 0 90px rgba(181, 157, 209, 0.18);
+  animation: name-neon 9s ease-in-out infinite;
 }
 @keyframes name-neon {
-  0%, 43%, 47%, 78%, 100% {
+  0%, 33%, 41%, 62%, 71%, 100% {
     opacity: 1;
+    color: var(--ink);
     text-shadow:
-      0 0 5px rgba(212, 189, 240, 0.45),
-      0 0 16px rgba(181, 157, 209, 0.30),
-      0 0 34px rgba(181, 157, 209, 0.18);
+      0 0 2px rgba(248, 242, 255, 0.9),
+      0 0 9px rgba(212, 189, 240, 0.75),
+      0 0 24px rgba(181, 157, 209, 0.55),
+      0 0 48px rgba(181, 157, 209, 0.32),
+      0 0 90px rgba(181, 157, 209, 0.18);
   }
-  45% {   /* one soft dip, like current settling in the tube */
-    opacity: 0.9;
+  /* buzz cluster one: stutter-stutter-recover */
+  35% { opacity: 0.7;
+    text-shadow: 0 0 2px rgba(212, 189, 240, 0.4), 0 0 8px rgba(181, 157, 209, 0.25); }
+  36.5% { opacity: 0.97; }
+  38% { opacity: 0.78;
+    text-shadow: 0 0 2px rgba(212, 189, 240, 0.45), 0 0 10px rgba(181, 157, 209, 0.3); }
+  /* buzz cluster two: hard cut, then an overshoot flare */
+  64% { opacity: 0.6;
+    text-shadow: 0 0 1px rgba(212, 189, 240, 0.35), 0 0 7px rgba(181, 157, 209, 0.2); }
+  66% {
+    opacity: 1;
+    color: #fbf8ff;
     text-shadow:
-      0 0 3px rgba(212, 189, 240, 0.30),
-      0 0 9px rgba(181, 157, 209, 0.18);
+      0 0 3px rgba(255, 253, 255, 1),
+      0 0 12px rgba(228, 210, 250, 0.95),
+      0 0 30px rgba(198, 174, 226, 0.7),
+      0 0 62px rgba(181, 157, 209, 0.45),
+      0 0 115px rgba(181, 157, 209, 0.25);
   }
-  79.5% { opacity: 0.94;
-    text-shadow:
-      0 0 4px rgba(212, 189, 240, 0.35),
-      0 0 12px rgba(181, 157, 209, 0.22); }
+  68.5% { opacity: 0.88; }
 }
 .tagline {
   font-family: var(--serif);
@@ -381,24 +396,50 @@ h1#name {
   margin: 0 0 1.5rem;
   letter-spacing: 0.005em;
 }
-/* "out now" as a small lavender neon sign beside the album title. Lit
-   accent glow with a couple of quick buzzes per cycle. */
+/* "out now" as a small, HOT lavender neon sign beside the album title.
+   Big halo, deep multi-step buzzes, and a catch-flare right after the
+   second buzz (when the sparks fly). Same 6.5s cycle as the sparks so
+   everything stays in sync. */
 .neon-outnow {
   position: relative;
-  color: var(--accent-bright);
+  color: #e9dcfb;
   text-shadow:
-    0 0 4px rgba(212, 189, 240, 0.75),
-    0 0 11px rgba(181, 157, 209, 0.5),
-    0 0 22px rgba(181, 157, 209, 0.3);
+    0 0 2px rgba(252, 248, 255, 0.95),
+    0 0 7px rgba(226, 205, 252, 0.9),
+    0 0 16px rgba(212, 189, 240, 0.7),
+    0 0 32px rgba(181, 157, 209, 0.5),
+    0 0 60px rgba(181, 157, 209, 0.28);
   animation: neon-outnow 6.5s ease-in-out infinite;
 }
 @keyframes neon-outnow {
-  0%, 46%, 52%, 74%, 82%, 100% { opacity: 1; }
-  48% { opacity: 0.5; }   /* buzz one */
-  50% { opacity: 0.85; }
-  77% { opacity: 0.35; }  /* buzz two, a touch harder */
-  79% { opacity: 0.9; }
-  80% { opacity: 0.55; }
+  0%, 44%, 54%, 72%, 88%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 2px rgba(252, 248, 255, 0.95),
+      0 0 7px rgba(226, 205, 252, 0.9),
+      0 0 16px rgba(212, 189, 240, 0.7),
+      0 0 32px rgba(181, 157, 209, 0.5),
+      0 0 60px rgba(181, 157, 209, 0.28);
+  }
+  /* buzz one: double stutter */
+  46% { opacity: 0.35; text-shadow: 0 0 2px rgba(226, 205, 252, 0.4), 0 0 8px rgba(181, 157, 209, 0.25); }
+  48% { opacity: 0.92; }
+  50% { opacity: 0.55; text-shadow: 0 0 2px rgba(226, 205, 252, 0.5), 0 0 10px rgba(181, 157, 209, 0.3); }
+  /* buzz two, harder — the sparks fly here */
+  76% { opacity: 0.9; }
+  77% { opacity: 0.2; text-shadow: 0 0 1px rgba(226, 205, 252, 0.3), 0 0 6px rgba(181, 157, 209, 0.2); }
+  79% { opacity: 0.85; }
+  80% { opacity: 0.4; text-shadow: 0 0 2px rgba(226, 205, 252, 0.4), 0 0 8px rgba(181, 157, 209, 0.25); }
+  /* the catch — overshoot flare */
+  83% {
+    opacity: 1;
+    text-shadow:
+      0 0 3px rgba(255, 253, 255, 1),
+      0 0 10px rgba(240, 226, 255, 1),
+      0 0 22px rgba(212, 189, 240, 0.85),
+      0 0 44px rgba(181, 157, 209, 0.6),
+      0 0 80px rgba(181, 157, 209, 0.35);
+  }
 }
 /* Sparks that occasionally burst off the top-right of the "out now" sign,
    in sync with its second, harder buzz (~77% of the 6.5s cycle). */
@@ -484,8 +525,9 @@ h1#name {
   /* long steady glow */
   0%, 40% {
     stroke: #bfa6e0;
-    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
-            drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.95))
+            drop-shadow(0 0 9px rgba(181, 157, 209, 0.6))
+            drop-shadow(0 0 20px rgba(181, 157, 209, 0.3));
   }
   /* ignition stutter — the tube fights to light, then a big flare */
   41% { stroke: #5b4a75; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
@@ -502,8 +544,9 @@ h1#name {
   52% { stroke: #7d68a0; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.3)); }
   55%, 79% {
     stroke: #bfa6e0;
-    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
-            drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.95))
+            drop-shadow(0 0 9px rgba(181, 157, 209, 0.6))
+            drop-shadow(0 0 20px rgba(181, 157, 209, 0.3));
   }
   /* second, smaller flicker cluster — second spark burst */
   80% { stroke: #6a5688; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
@@ -511,8 +554,9 @@ h1#name {
   84% { stroke: #6a5688; filter: drop-shadow(0 0 1px rgba(181, 157, 209, 0.25)); }
   86%, 100% {
     stroke: #bfa6e0;
-    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.8))
-            drop-shadow(0 0 7px rgba(181, 157, 209, 0.45));
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.95))
+            drop-shadow(0 0 9px rgba(181, 157, 209, 0.6))
+            drop-shadow(0 0 20px rgba(181, 157, 209, 0.3));
   }
 }
 /* Sparks off the NE corner, timed to the two flares (49% and 82%). Each

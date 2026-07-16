@@ -332,6 +332,36 @@
   </section>
   </div><!-- /.about-press -->
 
+  <!-- Quote roulette: each load, one of the four quotes (the hero's
+       Obscure Sound line + the three Press quotes) is drawn for the hero;
+       the other three hold the Press section. Runs inline right after the
+       press markup parses so the shuffle lands before the reader gets
+       here. No JS -> the default arrangement above stands. -->
+  <script>
+  (function () {
+    var hero = document.querySelector('.hero-quote');
+    var slots = document.querySelectorAll('.press-quotes > li');
+    if (!hero || slots.length !== 3) return;
+    var pool = [{
+      text: hero.querySelector('p').innerHTML,
+      source: 'Obscure Sound',
+      url: 'https://www.obscuresound.com/2025/09/chris-portka-the-album-everyone-wants/'
+    }];
+    for (var i = 0; i < slots.length; i++) {
+      var a = slots[i].querySelector('cite a');
+      pool.push({ text: slots[i].querySelector('blockquote p').innerHTML, source: a.textContent, url: a.href });
+    }
+    var pick = Math.floor(Math.random() * pool.length);
+    if (pick === 0) return;
+    hero.querySelector('p').innerHTML = pool[pick].text;
+    hero.querySelector('cite a').textContent = pool[pick].source;
+    var slot = slots[pick - 1], slotLink = slot.querySelector('cite a');
+    slot.querySelector('blockquote p').innerHTML = pool[0].text;
+    slotLink.textContent = pool[0].source;
+    slotLink.href = pool[0].url;
+  })();
+  </script>
+
   <!-- ================= DISCOGRAPHY (recent — full archive on /earlier-work) ================= -->
   <section id="discography" class="discography" aria-labelledby="disco-heading">
     <svg class="lore-hint lore-hint--branch" aria-hidden="true"><use href="#lore-branch"/></svg>
