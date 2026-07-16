@@ -660,15 +660,16 @@ h1#name {
   89.5% { opacity: 0; transform: translate(12px,4px) scale(0.4); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
-/* Sticker tagline — "Musician, Songwriter, Guy" as black core / white
-   band / black rim, like a die-cut sticker slapped over the neon. Three
-   stacked copies because SVG text takes one stroke each; rounded joins
-   keep the bands smooth. */
+/* Sticker tagline — "Musician, Songwriter, Guy" in a flowing cursive as
+   black core / white band / black rim, like a die-cut sticker slapped
+   over the neon. Three stacked copies because SVG text takes one stroke
+   each; rounded joins keep the bands smooth. Dancing Script 700 is the
+   heaviest of the pretty cursives, so the counters survive the band. */
 .cali-tagline text {
-  font-family: var(--sans);
-  font-weight: 800;
-  font-size: 20.5px;
-  letter-spacing: 0.6px;
+  font-family: "Dancing Script", "Brush Script MT", cursive;
+  font-weight: 700;
+  font-size: 31px;
+  letter-spacing: 0;
   stroke-linejoin: round;
   stroke-linecap: round;
 }

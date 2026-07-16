@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.4.1] - 2026-07-16
+
+### Changed
+- Swapped the sticker tagline's font from Inter 800 to **Dancing Script 700** — a flowing cursive
+  that keeps the black-core / white-band / black-rim outline treatment but reads pretty instead of
+  blocky. Chosen from a seven-font rendered comparison (Pacifico, Kaushan, Yellowtail, Satisfy,
+  Courgette, Great Vibes) as the heaviest of the genuinely cursive options, so the counters
+  survive the stroke bands. Inter 800 dropped from the font payload.
+
 ## [1.4.0] - 2026-07-16
 
 ### Added
