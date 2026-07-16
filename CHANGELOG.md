@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.4.4] - 2026-07-16
+
+### Fixed
+- Long quotes drawn into the hero by the roulette read louder than the short default Berman line
+  (the styling was actually identical — the visual mass of a 3-line block did it). The hero quote's
+  measure is now capped at 34ch, and the roulette marks long draws (`.hero-quote--long`) to size
+  down to 0.9375rem at 85% opacity, so every quote carries the same whisper-weight. The Berman
+  line's look is unchanged.
+
 ## [1.4.3] - 2026-07-16
 
 ### Changed

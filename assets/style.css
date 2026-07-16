@@ -747,9 +747,16 @@ h1#name {
   .hero-cali:focus-within .redroom { animation: none; opacity: 0; }
 }
 
+/* The roulette can land any of the four quotes here; the styling is
+   identical for all of them, but a 150-char quote wraps into a block
+   that LOOKS louder than the one-line Berman quote at the same size.
+   Cap the measure and let the roulette script mark long quotes
+   (.hero-quote--long) to size down a notch, so every draw carries the
+   same whisper-weight in the hero. */
 .hero-quote {
-  margin: 0 0 2rem;
+  margin: 0 auto 2rem;
   padding: 0;
+  max-width: 34ch;
 }
 .hero-quote p {
   font-family: var(--serif);
@@ -759,6 +766,11 @@ h1#name {
   line-height: 1.5;
   color: var(--ink-soft);
   margin: 0 0 0.4rem;
+  text-wrap: balance;
+}
+.hero-quote--long p {
+  font-size: 0.9375rem;
+  opacity: 0.85;
 }
 .hero-quote cite {
   font-size: 0.6875rem;
@@ -824,6 +836,8 @@ h1#name {
     padding: var(--gutter) clamp(2rem, 5vw, 5rem);
   }
   h1#name { font-size: clamp(4.5rem, 7vw, 8rem); }
+  /* left-aligned hero column: pin the capped quote block left */
+  .hero-quote { margin-left: 0; margin-right: 0; }
   .hero-cali {
     margin: calc(-1 * clamp(4.5rem, 7vw, 8rem) - 1.25rem) 0 2rem -1.5rem;
   }

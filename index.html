@@ -354,6 +354,9 @@
     var pick = Math.floor(Math.random() * pool.length);
     if (pick === 0) return;
     hero.querySelector('p').innerHTML = pool[pick].text;
+    // long quotes size down a notch (.hero-quote--long) so every draw
+    // carries the same whisper-weight as the short default quote
+    hero.classList.toggle('hero-quote--long', hero.querySelector('p').textContent.length > 60);
     hero.querySelector('cite a').textContent = pool[pick].source;
     var slot = slots[pick - 1], slotLink = slot.querySelector('cite a');
     slot.querySelector('blockquote p').innerHTML = pool[0].text;
