@@ -829,7 +829,7 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   position: absolute;
   overflow: visible;
   pointer-events: none;
-  opacity: 0.2;
+  opacity: 0.1;
   z-index: 0;
   height: auto;
 }
@@ -845,16 +845,23 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
 .float-word .ct-outer { fill: none; stroke: #0a070f; stroke-width: 5.2; }
 .float-word .ct-band  { fill: none; stroke: #f2ecf7; stroke-width: 2.8; }
 .float-word .ct-core  { fill: #0a070f; }
-.float-word--musician   { top: 1.5%;  left: 2%;  width: 10.5rem; animation: word-float-a 26s ease-in-out infinite; }
-.float-word--songwriter { top: 40%;   right: 0;  width: 13rem;   animation: word-float-b 31s ease-in-out infinite; }
-.float-word--guy        { bottom: 6%; left: 12%; width: 6.5rem;  animation: word-float-a 21s ease-in-out infinite reverse; }
+.float-word--musician   { top: 1.5%;  left: 2%;  width: 10.5rem; animation: word-float-a 48s ease-in-out infinite; }
+.float-word--songwriter { top: 40%;   right: 0;  width: 13rem;   animation: word-float-b 58s ease-in-out infinite; }
+.float-word--guy        { bottom: 6%; left: 12%; width: 6.5rem;  animation: word-float-a 41s ease-in-out infinite reverse; }
+/* cloud wander: a slow loose loop through four waypoints with gentle
+   roll and a faint scale breath — drifting like clouds, never a
+   back-and-forth sway */
 @keyframes word-float-a {
-  0%, 100% { transform: translate(0, 0) rotate(-2.5deg); opacity: 0.2; }
-  50% { transform: translate(14px, -10px) rotate(2deg); opacity: 0.13; }
+  0%, 100% { transform: translate(0, 0) rotate(-2deg) scale(1); opacity: 0.1; }
+  25% { transform: translate(38px, -22px) rotate(1deg) scale(1.04); opacity: 0.07; }
+  50% { transform: translate(64px, 8px) rotate(3deg) scale(1); opacity: 0.1; }
+  75% { transform: translate(22px, 26px) rotate(0deg) scale(0.97); opacity: 0.06; }
 }
 @keyframes word-float-b {
-  0%, 100% { transform: translate(0, 0) rotate(2deg); opacity: 0.2; }
-  50% { transform: translate(-16px, 9px) rotate(-2.5deg); opacity: 0.14; }
+  0%, 100% { transform: translate(0, 0) rotate(2.5deg) scale(1); opacity: 0.1; }
+  25% { transform: translate(-46px, 18px) rotate(-1deg) scale(0.97); opacity: 0.06; }
+  50% { transform: translate(-70px, -12px) rotate(-3deg) scale(1.03); opacity: 0.1; }
+  75% { transform: translate(-28px, -30px) rotate(0.5deg) scale(1); opacity: 0.07; }
 }
 .hero-text { position: relative; }
 .hero-text > :not(.float-word) { position: relative; z-index: 1; }

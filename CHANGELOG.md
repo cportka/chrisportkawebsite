@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.5.2] - 2026-07-17
+
+### Changed
+- The three floating tagline words dim to 10% opacity and drift like clouds: a slow loose loop
+  through four waypoints (up to ~70px of travel over 41–58s) with gentle roll and a faint scale
+  breath, instead of the old short back-and-forth sway.
+
 ## [1.5.1] - 2026-07-16
 
 ### Changed
