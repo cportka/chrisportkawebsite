@@ -29,6 +29,10 @@ html {
   -webkit-text-size-adjust: 100%;
   font-optical-sizing: auto;
   background: var(--bg);
+  /* reserve the scrollbar lane up front — otherwise the bar appears
+     after first paint and shifts the whole page (the hero California
+     visibly jumps left on some loads) */
+  scrollbar-gutter: stable;
 }
 body {
   margin: 0;
@@ -458,13 +462,16 @@ h1#name {
   top: 0.08em;
   right: -0.02em;
   width: 0.5em;
-  height: 0.075em;
-  border-radius: 0.04em;
-  background: linear-gradient(90deg, rgba(248, 241, 255, 0) 0%, #f8f1ff 45%, #ffffff 100%);
-  box-shadow:
-    0 0 5px rgba(255, 255, 255, 1),
-    0 0 12px rgba(212, 189, 240, 0.9),
-    0 0 22px rgba(181, 157, 209, 0.5);
+  height: 0.11em;
+  /* angular dart: thin jagged tail, hard pointed head — no rounding, so
+     it reads as an electrical splinter, never a water drop. Glow moves
+     from box-shadow to drop-shadow so it follows the clipped shape. */
+  clip-path: polygon(0% 50%, 26% 10%, 74% 32%, 100% 50%, 74% 68%, 26% 90%);
+  background: linear-gradient(90deg, rgba(248, 241, 255, 0) 0%, #f8f1ff 55%, #ffffff 100%);
+  filter:
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.95))
+    drop-shadow(0 0 8px rgba(212, 189, 240, 0.8))
+    drop-shadow(0 0 15px rgba(181, 157, 209, 0.45));
   opacity: 0;
   transform-origin: left center;
   pointer-events: none;
@@ -698,7 +705,16 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
 }
 @keyframes cali-neon {
   /* long steady glow */
-  0%, 40% {
+  0%, 23% {
+    stroke: #bfa6e0;
+    filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.95))
+            drop-shadow(0 0 9px rgba(181, 157, 209, 0.6))
+            drop-shadow(0 0 20px rgba(181, 157, 209, 0.3));
+  }
+  /* small fizz up north — the Oregon-border ticks discharge here */
+  24.5% { stroke: #8a73ad; filter: drop-shadow(0 0 2px rgba(181, 157, 209, 0.4)); }
+  26% { stroke: #d4bdf0; filter: drop-shadow(0 0 4px rgba(212, 189, 240, 0.8)) drop-shadow(0 0 10px rgba(181, 157, 209, 0.5)); }
+  27.5%, 40% {
     stroke: #bfa6e0;
     filter: drop-shadow(0 0 3px rgba(181, 157, 209, 0.95))
             drop-shadow(0 0 9px rgba(181, 157, 209, 0.6))
@@ -734,9 +750,11 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
             drop-shadow(0 0 20px rgba(181, 157, 209, 0.3));
   }
 }
-/* Sparks off the SE corner, timed to the two flares (49% and 82%). Each
-   is a thin jagged shard (stroke path) that flies out along its own
-   direction and burns out fast — angular, like real electrical sparks. */
+/* Sparks at five geographic short points, each with its own vocabulary
+   and moment: Oregon-border static ticks fizz upward at ~25%; the Bay
+   throws the big bolt west at the 49% flare; LA fans shards southwest
+   right after; Tahoe crackles east at the 82% flicker; the Tijuana
+   border drips needles south just behind it. */
 .cali-spark {
   fill: none;
   stroke: #f6eeff;
@@ -749,7 +767,9 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 1))
           drop-shadow(0 0 7px rgba(212, 189, 240, 0.9))
           drop-shadow(0 0 14px rgba(181, 157, 209, 0.5));
-  animation: cali-spark-1 7s linear infinite;
+  animation-duration: 7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 /* a bigger angular bolt that cracks off the corner at the big flares */
 .cali-bolt {
@@ -763,66 +783,88 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   opacity: 0;
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 1))
           drop-shadow(0 0 9px rgba(181, 157, 209, 0.85));
-  animation: cali-bolt 7s linear infinite;
+  animation-duration: 7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
-@keyframes cali-bolt {
+/* per-location assignments — each cluster fires at its own moment */
+.cs-or1 { animation-name: cs-or1; stroke-width: 1.5; }
+.cs-or2 { animation-name: cs-or2; stroke-width: 1.5; }
+/* bay pieces are drawn westward, so their coast attach point is the
+   RIGHT edge of their fill-box — scale from there, not the far tip */
+.cs-baybolt { animation-name: cs-baybolt; transform-origin: right center; }
+.cs-bay1 { animation-name: cs-bay1; transform-origin: right center; }
+.cs-th1 { animation-name: cs-th1; stroke-width: 1.6; }
+.cs-th2 { animation-name: cs-th2; stroke-width: 1.6; }
+.cs-la1 { animation-name: cs-la1; }
+.cs-la2 { animation-name: cs-la2; stroke-width: 1.6; }
+.cs-tj1 { animation-name: cs-tj1; stroke-width: 1.5; }
+.cs-tj2 { animation-name: cs-tj2; stroke-width: 1.4; }
+/* Oregon border — static ticks discharging upward on the 25% fizz */
+@keyframes cs-or1 {
+  0%, 24% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  25% { opacity: 1; transform: translate(0,-1px) scale(1); }
+  30% { opacity: 0; transform: translate(1px,-11px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes cs-or2 {
+  0%, 24.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  25.5% { opacity: 0.9; transform: translate(0,-1px) scale(0.9); }
+  31% { opacity: 0; transform: translate(3px,-9px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+/* Bay Area — the big bolt cracks west at the 49% flare, with a shard */
+@keyframes cs-baybolt {
   0%, 48.5% { opacity: 0; transform: scale(0.15); }
   49.3% { opacity: 1; transform: scale(1); }
   50.2% { opacity: 0.1; transform: scale(1.05); }
-  51% { opacity: 0.95; transform: scale(1.25) rotate(6deg); }
+  51% { opacity: 0.95; transform: scale(1.25) rotate(-6deg); }
   53% { opacity: 0; transform: scale(1.1); }
-  81.5% { opacity: 0; transform: scale(0.15); }
-  82.3% { opacity: 0.9; transform: scale(0.95) rotate(-4deg); }
-  84% { opacity: 0; transform: scale(0.85); }
   100% { opacity: 0; transform: scale(0.15); }
 }
-.cali-spark--2 { animation-name: cali-spark-2; }
-.cali-spark--3 { animation-name: cali-spark-3; }
-.cali-spark--4 { animation-name: cali-spark-4; stroke-width: 1.4; }
-.cali-spark--5 { animation-name: cali-spark-5; stroke-width: 1.4; }
-@keyframes cali-spark-1 {
+@keyframes cs-bay1 {
   0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  49% { opacity: 1; transform: translate(1px,-1px) scale(1); }
-  54% { opacity: 0; transform: translate(14px,-9px) scale(0.5); }
-  81% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  82% { opacity: 0.9; transform: translate(1px,-1px) scale(0.9); }
-  87% { opacity: 0; transform: translate(11px,-7px) scale(0.45); }
+  49% { opacity: 1; transform: translate(-1px,-1px) scale(1); }
+  54% { opacity: 0; transform: translate(-13px,-6px) scale(0.45); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
-@keyframes cali-spark-2 {
-  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  49% { opacity: 1; transform: translate(2px,0) scale(1); }
-  55% { opacity: 0; transform: translate(16px,-1px) scale(0.5); }
-  81% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  82% { opacity: 0.85; transform: translate(2px,0) scale(0.85); }
-  88% { opacity: 0; transform: translate(12px,-1px) scale(0.45); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
-}
-@keyframes cali-spark-3 {
-  0%, 48% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  49.5% { opacity: 1; transform: translate(1px,1px) scale(0.95); }
-  56% { opacity: 0; transform: translate(12px,10px) scale(0.45); }
-  81% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  82.5% { opacity: 0.8; transform: translate(1px,1px) scale(0.8); }
-  89% { opacity: 0; transform: translate(10px,8px) scale(0.4); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
-}
-@keyframes cali-spark-4 {
-  0%, 48.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  49.5% { opacity: 0.95; transform: translate(0,-2px) scale(0.95); }
-  55% { opacity: 0; transform: translate(4px,-15px) scale(0.4); }
-  81.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  82.5% { opacity: 0.85; transform: translate(0,-2px) scale(0.8); }
-  88% { opacity: 0; transform: translate(3px,-11px) scale(0.4); }
-  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
-}
-@keyframes cali-spark-5 {
+/* LA — shard fan flies southwest just after the big flare */
+@keyframes cs-la1 {
   0%, 49% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  50% { opacity: 0.9; transform: translate(2px,1px) scale(0.9); }
-  56.5% { opacity: 0; transform: translate(15px,5px) scale(0.4); }
-  82% { opacity: 0; transform: translate(0,0) scale(0.4); }
-  83% { opacity: 0.8; transform: translate(2px,1px) scale(0.75); }
-  89.5% { opacity: 0; transform: translate(12px,4px) scale(0.4); }
+  50% { opacity: 1; transform: translate(-1px,1px) scale(1); }
+  55.5% { opacity: 0; transform: translate(-10px,10px) scale(0.45); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes cs-la2 {
+  0%, 49.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  50.5% { opacity: 0.9; transform: translate(-2px,0) scale(0.9); }
+  56% { opacity: 0; transform: translate(-14px,3px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+/* Tahoe — crackle pair snaps east at the 82% flicker */
+@keyframes cs-th1 {
+  0%, 81% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  82% { opacity: 1; transform: translate(1px,-1px) scale(1); }
+  87% { opacity: 0; transform: translate(12px,-5px) scale(0.45); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes cs-th2 {
+  0%, 81.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  82.5% { opacity: 0.9; transform: translate(1px,1px) scale(0.9); }
+  88% { opacity: 0; transform: translate(10px,7px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+/* Tijuana border — needle drips fall south right behind Tahoe */
+@keyframes cs-tj1 {
+  0%, 82% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  83% { opacity: 1; transform: translate(0,1px) scale(1); }
+  88.5% { opacity: 0; transform: translate(2px,12px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes cs-tj2 {
+  0%, 82.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  83.5% { opacity: 0.85; transform: translate(0,1px) scale(0.9); }
+  89% { opacity: 0; transform: translate(-2px,11px) scale(0.4); }
   100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
 /* Floating tagline words — "Musician" / "Songwriter" / "Guy" as three
@@ -1861,6 +1903,190 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   color: var(--ink-soft);
   margin: 2rem 0 0;
   font-size: 1.0625rem;
+}
+
+/* ---------- Glitch error scenes (404 + friends) ----------
+   A broken-broadcast take on the neon noir: the big word RGB-splits
+   into two ghost channels whose clip slices jump around, the whole
+   scene tears sideways now and then, a scan band sweeps down over
+   scanlines, and a lore chicken glitches in the corner. Color-ways via
+   CSS vars: the 404 runs electric cyan/magenta ghosts on lavender; the
+   generic error page runs the crimson/amber way (.glitch-scene--crimson,
+   a cousin of the Red Room). */
+.glitch-scene {
+  --gx-a: #d4bdf0;
+  --gx-b: #7df3ff;
+  --gx-c: #ff5fb2;
+  min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.glitch-scene--crimson {
+  --gx-a: #ffb0a6;
+  --gx-b: #ff4438;
+  --gx-c: #ffb02e;
+}
+/* occasional whole-scene tear — steps(1) so it CUTS, never eases */
+.glitch-jolt {
+  animation: glitch-jolt 7s steps(1) infinite;
+}
+@keyframes glitch-jolt {
+  0%, 100% { transform: none; }
+  8% { transform: translateX(-7px) skewX(-4deg); }
+  8.6% { transform: translateX(4px) skewX(2deg); }
+  9.2% { transform: none; }
+  33% { transform: translateX(3px); }
+  33.4% { transform: none; }
+  47% { transform: translateX(9px) skewX(5deg); }
+  47.6% { transform: translateX(-5px) skewX(-2deg); }
+  48.2% { transform: none; }
+  76% { transform: scaleX(1.03) translateX(-4px); }
+  76.6% { transform: none; }
+}
+.glitch-word {
+  position: relative;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(6rem, 24vw, 15rem);
+  line-height: 0.9;
+  margin: 0 0 1.25rem;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-shadow:
+    0 0 6px rgba(248, 242, 255, 0.8),
+    0 0 24px var(--gx-a),
+    0 0 60px rgba(181, 157, 209, 0.4);
+  animation: glitch-word-flicker 4.2s linear infinite;
+  user-select: none;
+}
+/* the two ghost channels: same text, offset, clipped to jumping slices */
+.glitch-word::before,
+.glitch-word::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  text-shadow: none;
+  pointer-events: none;
+}
+.glitch-word::before { color: var(--gx-b); animation: glitch-slice-a 3.1s steps(1) infinite; }
+.glitch-word::after  { color: var(--gx-c); animation: glitch-slice-b 2.7s steps(1) infinite; }
+@keyframes glitch-slice-a {
+  0%, 100% { clip-path: inset(0 0 92% 0); transform: translate(-6px, -2px); }
+  10% { clip-path: inset(12% 0 74% 0); transform: translate(5px, 1px); }
+  22% { clip-path: inset(38% 0 48% 0); transform: translate(-8px, 0); }
+  34% { clip-path: inset(55% 0 30% 0); transform: translate(7px, 2px); }
+  48% { clip-path: inset(80% 0 6% 0); transform: translate(-5px, -1px); }
+  60% { clip-path: inset(25% 0 62% 0); transform: translate(9px, 0); }
+  74% { clip-path: inset(65% 0 20% 0); transform: translate(-7px, 1px); }
+  88% { clip-path: inset(5% 0 85% 0); transform: translate(6px, -2px); }
+}
+@keyframes glitch-slice-b {
+  0%, 100% { clip-path: inset(85% 0 4% 0); transform: translate(6px, 2px); }
+  13% { clip-path: inset(60% 0 28% 0); transform: translate(-6px, -1px); }
+  27% { clip-path: inset(30% 0 58% 0); transform: translate(8px, 0); }
+  41% { clip-path: inset(8% 0 80% 0); transform: translate(-9px, 2px); }
+  55% { clip-path: inset(48% 0 40% 0); transform: translate(5px, -2px); }
+  69% { clip-path: inset(72% 0 14% 0); transform: translate(-7px, 0); }
+  83% { clip-path: inset(18% 0 70% 0); transform: translate(7px, 1px); }
+}
+@keyframes glitch-word-flicker {
+  0%, 40.5%, 43.5%, 81%, 83.5%, 100% { opacity: 1; }
+  41.5% { opacity: 0.6; }
+  42.5% { opacity: 0.95; }
+  82% { opacity: 0.7; }
+}
+/* scanlines + a sweeping scan band */
+.glitch-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0 1px,
+    transparent 1px 3px);
+}
+/* the sweep is a fixed-height band moved with transform (GPU-composited)
+   — animating background-position would repaint the whole scene on the
+   main thread every frame */
+.glitch-scan::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -200px;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(212, 189, 240, 0.05) 44%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(212, 189, 240, 0.05) 56%,
+    transparent 100%);
+  will-change: transform;
+  animation: scan-sweep 5s linear infinite;
+}
+@keyframes scan-sweep {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(100vh + 400px)); }
+}
+.err-line {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin: 0 0 2.5rem;
+  font-size: 1.25rem;
+}
+.err-back {
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+/* the lore chicken caught in the broadcast — three stacked copies, the
+   two color channels jumping out of register */
+.glitch-chicken {
+  width: 4.2rem;
+  height: auto;
+  margin-top: 2.75rem;
+  overflow: visible;
+}
+.glitch-chicken .ck { opacity: 0.5; }
+.glitch-chicken .ck-a { fill: var(--gx-b); opacity: 0.45; animation: chick-a 2.9s steps(1) infinite; }
+.glitch-chicken .ck-b { fill: var(--gx-c); opacity: 0.45; animation: chick-b 3.4s steps(1) infinite; }
+.glitch-chicken .ck-core { fill: #b9a6d6; }
+@keyframes chick-a {
+  0%, 100% { transform: translate(-2px, 0); }
+  24% { transform: translate(3px, -1px); }
+  47% { transform: translate(-4px, 1px); }
+  72% { transform: translate(2px, 0); }
+}
+@keyframes chick-b {
+  0%, 100% { transform: translate(2px, 1px); }
+  31% { transform: translate(-3px, 0); }
+  58% { transform: translate(4px, -1px); }
+  79% { transform: translate(-2px, 1px); }
+}
+/* Reduced motion: the global `* { animation: none }` fallback can't
+   reach pseudo-elements, so the glitch ghosts/scan need their own kill
+   switch — and the ghost copies are removed outright (frozen at a
+   random slice they'd just read as misprints). The scene settles to a
+   calm glowing 404. */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-jolt,
+  .glitch-word { animation: none !important; }
+  .glitch-word::before,
+  .glitch-word::after { animation: none !important; content: none; }
+  .glitch-scan { display: none; }
+  .glitch-chicken .ck-a,
+  .glitch-chicken .ck-b { animation: none !important; opacity: 0; }
 }
 
 /* ---------- Reduced motion ---------- */

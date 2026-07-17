@@ -4,6 +4,28 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.7.0] - 2026-07-17
+
+### Added
+- The 404 is now a full broken-broadcast glitch scene: a giant RGB-split "404" whose cyan/magenta
+  ghost channels slice and jump out of register, whole-scene tear jolts, scanlines with a sweeping
+  scan band, an occasional character-scramble on the subline, and a glitched lore chicken — all on
+  top of the existing dying "Not found" sign. A sibling `error.html` runs the same scene in a
+  crimson/amber color-way for anything that isn't a plain missing page.
+- The California sign now shorts at five geographic points, each with its own spark vocabulary and
+  moment: Oregon-border static ticks (on a new small fizz in the cycle), the Bay Area throws the
+  big bolt west at the main flare, LA fans shards southwest, Lake Tahoe crackles east at the
+  second flicker, and the Tijuana border drips needles south.
+
+### Changed
+- Needle sparks across all signs are now angular darts (clip-path, glow via drop-shadow) instead
+  of rounded drops.
+
+### Fixed
+- The hero California could land horizontally shifted on some loads — most likely the scrollbar
+  appearing after first paint and pushing the page. `scrollbar-gutter: stable` now reserves the
+  lane up front so nothing jumps.
+
 ## [1.6.1] - 2026-07-17
 
 ### Changed

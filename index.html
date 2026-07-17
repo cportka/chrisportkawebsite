@@ -234,13 +234,22 @@
               stroke-linecap="round"
             />
             <!-- sparks that spray off the SE corner (open space) when the tube shorts -->
+            <!-- five geographic short points, each with its own spark
+                 vocabulary and moment in the 7s cycle:
+                 Oregon border (static ticks, up) · Bay Area (the bolt,
+                 west) · Lake Tahoe (crackle pair, east) · LA (shard fan,
+                 southwest) · Tijuana border (needle drips, south) -->
             <g class="cali-sparks" aria-hidden="true">
-              <path class="cali-spark cali-spark--1" d="M236 224 l6 -4 l-2 1 l7 -4"/>
-              <path class="cali-spark cali-spark--2" d="M236 224 l8 -1 l-3 1 l9 0"/>
-              <path class="cali-spark cali-spark--3" d="M236 224 l5 4 l-2 -1 l7 5"/>
-              <path class="cali-spark cali-spark--4" d="M236 224 l3 -7 l-1 3 l3 -7"/>
-              <path class="cali-spark cali-spark--5" d="M236 224 l7 2 l-2 -2 l8 4"/>
-              <path class="cali-bolt" d="M236 224 l9 -3 l-4 4 l13 -2 l-5 5 l15 1"/>
+              <path class="cali-spark cs-or1" d="M50 2 l2 -7 l-1 3 l2 -6"/>
+              <path class="cali-spark cs-or2" d="M62 2 l4 -6 l-2 2 l4 -5"/>
+              <path class="cali-spark cs-bay1" d="M44 124 l-7 -3 l3 1 l-8 -4"/>
+              <path class="cali-bolt cs-baybolt" d="M44 124 l-8 -4 l4 3 l-11 -3 l5 4 l-13 -1"/>
+              <path class="cali-spark cs-th1" d="M103 86 l7 -2 l-3 1 l8 -3"/>
+              <path class="cali-spark cs-th2" d="M103 86 l6 4 l-2 -1 l7 4"/>
+              <path class="cali-spark cs-la1" d="M138 237 l-6 5 l2 -2 l-7 6"/>
+              <path class="cali-spark cs-la2" d="M138 237 l-8 1 l3 0 l-9 2"/>
+              <path class="cali-spark cs-tj1" d="M183 277 l2 7 l-1 -3 l2 7"/>
+              <path class="cali-spark cs-tj2" d="M172 278 l-1 7 l0 -3 l-2 7"/>
             </g>
           </g>
         </svg>

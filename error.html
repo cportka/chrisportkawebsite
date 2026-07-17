@@ -3,27 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Not found — Chris Portka</title>
-  <meta name="description" content="This page wandered off — but the music is still here. Chris Portka, songwriter from Berkeley, California.">
+  <title>Error — Chris Portka</title>
+  <meta name="description" content="Something shorted out. Chris Portka, songwriter from Berkeley, California.">
   <meta name="theme-color" content="#100c17">
   <meta name="robots" content="noindex">
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Not found — Chris Portka">
-  <meta property="og:description" content="This page wandered off — but the music is still here.">
-  <meta property="og:image" content="https://chrisportka.com/assets/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Portrait of Chris Portka">
-  <meta property="og:site_name" content="Chris Portka">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Not found — Chris Portka">
-  <meta name="twitter:description" content="This page wandered off — but the music is still here.">
-  <meta name="twitter:image" content="https://chrisportka.com/assets/og-image.jpg">
-  <meta name="twitter:image:alt" content="Portrait of Chris Portka">
-  <meta name="twitter:site" content="@chrisportka">
-  <meta name="twitter:creator" content="@chrisportka">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
@@ -36,11 +19,13 @@
 </head>
 <body>
 <main>
-  <section class="glitch-scene" aria-labelledby="err-title">
+  <!-- the crimson color-way: same broken broadcast, hotter channel —
+       for anything that goes wrong that isn't a plain missing page -->
+  <section class="glitch-scene glitch-scene--crimson" aria-labelledby="err-title">
     <div class="glitch-jolt">
-      <p class="glitch-word" data-text="404" aria-hidden="true">404</p>
-      <h1 id="err-title" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2rem,5vw,3.25rem);margin:0 0 1rem;letter-spacing:-0.005em;"><span class="neon-404">Not found<span class="sign-spark sign-spark--404a" aria-hidden="true"></span><span class="sign-spark sign-spark--404b" aria-hidden="true"></span><span class="sign-bolt sign-bolt--404" aria-hidden="true"></span></span></h1>
-      <p class="err-line"><span class="visually-hidden">Nothing here. Maybe a song is missing.</span><span id="err-line" aria-hidden="true">Nothing here. Maybe a song is missing.</span></p>
+      <p class="glitch-word" data-text="error" aria-hidden="true">error</p>
+      <h1 id="err-title" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2rem,5vw,3.25rem);margin:0 0 1rem;letter-spacing:-0.005em;"><span class="neon-404">Something shorted out</span></h1>
+      <p class="err-line"><span class="visually-hidden">Give it a second, or head back to the music.</span><span id="err-line" aria-hidden="true">Give it a second, or head back to the music.</span></p>
       <p class="err-back"><a href="/" class="neon-link">Back to chrisportka.com</a></p>
       <svg class="glitch-chicken" viewBox="12 0 84 118" aria-hidden="true">
         <path class="ck ck-a" d="M40 26 L42 16 L47 24 L51 14 L55 24 Q64 26 62 38 L72 40 L60 46 L62 54 Q84 52 92 84 Q78 74 66 74 Q70 96 40 96 Q14 96 18 68 Q20 48 40 46 Q34 36 40 26 Z"/>
@@ -52,8 +37,6 @@
   </section>
 </main>
 <script>
-// occasional character scramble on the subline — pure garnish, skipped
-// entirely for reduced-motion users
 (function () {
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var el = document.getElementById('err-line');
@@ -68,7 +51,7 @@
     }
     el.textContent = chars.join('');
     setTimeout(function () { el.textContent = original; }, 140);
-  }, 3800);
+  }, 3400);
 })();
 </script>
 </body>
