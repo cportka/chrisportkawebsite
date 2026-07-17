@@ -2,6 +2,12 @@
 
 Static site for **Chris Portka** at <https://chrisportka.com>. Hosted on GitHub Pages from `main`. No build step.
 
+Repo renamed **`cportka/chrisportkawebsite` → `cportka/chris-portka-dot-com`** (July 2026). GitHub
+redirects the old name everywhere, and the sandbox git proxy still only accepts the OLD path — so
+if `git push` 403s on the new path, push to
+`http://local_proxy@127.0.0.1:<port>/git/cportka/chrisportkawebsite` instead (the redirect lands it
+in the renamed repo).
+
 ## Layout
 
 ```
