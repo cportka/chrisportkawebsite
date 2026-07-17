@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows Keep
 (https://keepachangelog.com) and the project uses Semantic Versioning (https://semver.org).
 Every change bumps the version and adds an entry below.
 
+## [1.6.1] - 2026-07-17
+
+### Changed
+- The three drifting words rise to 12% opacity, and their broken neon got meaner: two stutter
+  clusters per cycle with a harder brown-out and a brighter overshoot flash — plus each word now
+  throws two tiny sparks at the moment of its big flash (spark timings share each word's neon
+  duration/delay so they always land on it).
+
 ## [1.6.0] - 2026-07-17
 
 ### Added

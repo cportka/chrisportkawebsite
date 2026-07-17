@@ -834,7 +834,7 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   position: absolute;
   overflow: visible;
   pointer-events: none;
-  opacity: 0.08;
+  opacity: 0.12;
   z-index: 0;
   height: auto;
   will-change: transform, opacity, filter;
@@ -877,7 +877,7 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
 }
 @keyframes word-fade-in {
   from { opacity: 0; }
-  to { opacity: 0.08; }
+  to { opacity: 0.12; }
 }
 /* wind wander: uneven waypoint spacing = gusts that accelerate, then
    long lulls that ease off — a breeze, not a metronome */
@@ -897,13 +897,52 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   68%  { transform: translate(-42px, -28px) rotate(-1deg) scale(1.01); }
   100% { transform: translate(0, 0) rotate(2.5deg) scale(1); }
 }
-/* broken neon: the sticker's white band browns out for a blink, then
-   overshoots bright — like a tube half-catching. Filter-based so it
-   never collides with the fade-in's opacity. */
+/* broken neon: two stutter clusters per cycle — the sticker's white
+   band browns out, half-catches, then overshoots hard on the second
+   with a lavender halo. Filter-based so it never collides with the
+   fade-in's opacity. Sparks (below) fly on the big 58% flash. */
 @keyframes word-neon {
-  0%, 55%, 59.5%, 100% { filter: brightness(1); }
-  56.5% { filter: brightness(0.4); }
-  58% { filter: brightness(1.9) drop-shadow(0 0 6px rgba(242, 236, 247, 0.5)); }
+  0%, 30%, 34.5%, 55%, 60.5%, 100% { filter: brightness(1); }
+  31.5% { filter: brightness(0.35); }
+  33% { filter: brightness(1.6) drop-shadow(0 0 5px rgba(242, 236, 247, 0.5)); }
+  56.5% { filter: brightness(0.3); }
+  58% { filter: brightness(2.2)
+        drop-shadow(0 0 8px rgba(242, 236, 247, 0.7))
+        drop-shadow(0 0 16px rgba(181, 157, 209, 0.5)); }
+  59.5% { filter: brightness(0.5); }
+}
+/* word sparks — tiny shards that fly off a word at its big flash. Each
+   word's sparks share its word-neon duration + delay so they always
+   land on the flash. */
+.word-spark {
+  fill: none;
+  stroke: #f6eeff;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: left center;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+          drop-shadow(0 0 5px rgba(181, 157, 209, 0.8));
+}
+.float-word--musician .word-spark--a   { animation: word-spark-a 17s linear 6s infinite; }
+.float-word--musician .word-spark--b   { animation: word-spark-b 17s linear 6s infinite; }
+.float-word--songwriter .word-spark--a { animation: word-spark-a 23s linear 13s infinite; }
+.float-word--songwriter .word-spark--b { animation: word-spark-b 23s linear 13s infinite; }
+.float-word--guy .word-spark--a        { animation: word-spark-a 19s linear 21s infinite; }
+.float-word--guy .word-spark--b        { animation: word-spark-b 19s linear 21s infinite; }
+@keyframes word-spark-a {
+  0%, 57.5% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  58.2% { opacity: 1; transform: translate(1px,-1px) scale(1); }
+  62% { opacity: 0; transform: translate(11px,-7px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
+}
+@keyframes word-spark-b {
+  0%, 57.8% { opacity: 0; transform: translate(0,0) scale(0.4); }
+  58.5% { opacity: 0.95; transform: translate(1px,0) scale(0.9); }
+  62.5% { opacity: 0; transform: translate(12px,3px) scale(0.4); }
+  100% { opacity: 0; transform: translate(0,0) scale(0.4); }
 }
 .hero-text { position: relative; }
 .hero-text > :not(.float-word) { position: relative; z-index: 1; }
@@ -964,6 +1003,7 @@ a.neon-link.neon-link:hover { color: #f0e7fb; }
   .cali-bolt,
   .sign-spark,
   .sign-bolt,
+  .word-spark,
   .lore { animation: none; opacity: 0; }
   /* !important is load-bearing: the hover/focus trigger rules appear
      later in the file with equal specificity, and the global
